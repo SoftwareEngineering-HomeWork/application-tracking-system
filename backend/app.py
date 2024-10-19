@@ -7,10 +7,9 @@ from datetime import datetime, timedelta
 import hashlib
 import uuid
 import random
-from flask import Flask, jsonify, request, send_file, redirect, url_for, session
+from flask import Flask, jsonify, request, send_file, redirect, url_for, session, make_response
 from flask_mongoengine import MongoEngine
 from flask_cors import CORS, cross_origin
-
 from bs4 import BeautifulSoup
 
 from fake_useragent import UserAgent
@@ -39,8 +38,8 @@ def create_app():
     :return: Flask object
     """
     app = Flask(__name__)
-    # # make flask support CORS
-    CORS(app)
+    # Enable CORS for all routes, specifically allowing localhost:3000
+    CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
     # get all the variables from the application.yml file
     with open("application.yml") as f:
@@ -218,13 +217,11 @@ def create_app():
 
         return redirect(f"http://127.0.0.1:3000/?token={token_whole}&expiry={expiry_str}&userId={unique_id}")
 
-    @app.route("/users/signup", methods=["POST"])
+    @app.route("/users/signup", methods=["POST", "OPTIONS"])
     def sign_up():
-        """
-        Creates a new user profile and adds the user to the database and returns the message
-
-        :return: JSON object
-        """
+        if request.method == "OPTIONS":
+            return _build_cors_preflight_response()
+        
         try:
             # print(request.data)
             data = json.loads(request.data)
@@ -256,11 +253,12 @@ def create_app():
                 institution="",
                 email=""
             )
-            user.save()
+            # user.save()
             # del user.to_json()["password", "authTokens"]
             return jsonify(user.to_json()), 200
-        except:
-            return jsonify({"error": "Internal server error"}), 500
+        except Exception as e:
+            print(e)
+            return _corsify_actual_response(jsonify({"error": "Internal server error"})), 500
 
     @app.route("/getProfile", methods=["GET"])
     def get_profile_data():
@@ -682,6 +680,23 @@ def create_app():
         except:
             return jsonify({"error": "Internal server error"}), 500
 
+    @app.after_request
+    def after_request(response):
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+        response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+        return response
+
+    def _build_cors_preflight_response():
+        response = make_response()
+        response.headers.add("Access-Control-Allow-Origin", "http://localhost:3000")
+        response.headers.add('Access-Control-Allow-Headers', "Content-Type,Authorization")
+        response.headers.add('Access-Control-Allow-Methods', "GET,PUT,POST,DELETE,OPTIONS")
+        return response
+
+    def _corsify_actual_response(response):
+        response.headers.add("Access-Control-Allow-Origin", "http://localhost:3000")
+        return response
+
     return app
 
 
@@ -779,3 +794,4 @@ def get_new_application_id(user_id):
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
+
