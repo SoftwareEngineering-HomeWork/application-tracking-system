@@ -1,25 +1,48 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager  # Import webdriver-manager
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
+from datetime import datetime
 import time
 
-# Initialize WebDriver without specifying the path to chromedriver
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+driver.maximize_window()
 
-# Open a website
 driver.get("https://github.com/SimplifyJobs/Summer2025-Internships")
 
-# Wait for the page to load
-time.sleep(2)
+time.sleep(3)
 
-# Locate the search bar using its name attribute and search for something
-first_element = driver.find_element(By.XPATH, "//markdown-accessiblity-table/table/tbody/tr[2]/td/strong")
-print(first_element.text)
-# search_box.send_keys("Selenium WebDriver")
-# search_box.send_keys(Keys.RETURN)
+current_date = datetime.now().strftime("%b %d")
+i = 1
+visited = False
 
+companies = []
+roles = []
+locations = []
+application_links = []
 
-# Close the browser
+total_companies = len(driver.find_elements(By.XPATH, "//markdown-accessiblity-table/table/tbody/tr"))
+
+while i<=total_companies:
+    date_posted = driver.find_element(By.XPATH, "//markdown-accessiblity-table/table/tbody/tr[" + str(i) + "]/td[5]").text
+    if date_posted == current_date:
+        company = driver.find_element(By.XPATH, "//markdown-accessiblity-table/table/tbody/tr[" + str(i) + "]/td/strong").text
+        role = driver.find_element(By.XPATH, "//markdown-accessiblity-table/table/tbody/tr[" + str(i) + "]/td[2]").text
+        location = driver.find_element(By.XPATH, "//markdown-accessiblity-table/table/tbody/tr[" + str(i) + "]/td[3]").text
+        application_link = driver.find_element(By.XPATH, "//markdown-accessiblity-table/table/tbody/tr[" + str(i) + "]/td[4]/a").get_attribute("href")
+        companies.append(company)
+        roles.append(role)
+        locations.append(location)
+        application_links.append(application_link)
+        visited = True
+    elif visited:
+        break
+    i += 1
+
 driver.quit()
+
+print(companies)
+print(roles)
+print(locations)
+print(application_links)
