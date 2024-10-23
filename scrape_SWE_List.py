@@ -1,36 +1,30 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
+import requests
+from lxml import html
 from datetime import datetime
-import time
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-driver.maximize_window()
+url = "https://github.com/SimplifyJobs/Summer2025-Internships"
 
-driver.get("https://github.com/SimplifyJobs/Summer2025-Internships")
+response = requests.get(url)
+tree = html.fromstring(response.content)
 
-time.sleep(3)
+listings = tree.xpath('//markdown-accessiblity-table/table/tbody/tr')
+total_listings = len(listings)
 
 current_date = datetime.now().strftime("%b %d")
 i = 1
 visited = False
-
 companies = []
 roles = []
 locations = []
 application_links = []
 
-total_companies = len(driver.find_elements(By.XPATH, "//markdown-accessiblity-table/table/tbody/tr"))
-
-while i<=total_companies:
-    date_posted = driver.find_element(By.XPATH, "//markdown-accessiblity-table/table/tbody/tr[" + str(i) + "]/td[5]").text
+while i<=total_listings:
+    date_posted = tree.xpath('//markdown-accessiblity-table/table/tbody/tr[' + str(i) + ']/td[5]')[0].text_content()
     if date_posted == current_date:
-        company = driver.find_element(By.XPATH, "//markdown-accessiblity-table/table/tbody/tr[" + str(i) + "]/td/strong").text
-        role = driver.find_element(By.XPATH, "//markdown-accessiblity-table/table/tbody/tr[" + str(i) + "]/td[2]").text
-        location = driver.find_element(By.XPATH, "//markdown-accessiblity-table/table/tbody/tr[" + str(i) + "]/td[3]").text
-        application_link = driver.find_element(By.XPATH, "//markdown-accessiblity-table/table/tbody/tr[" + str(i) + "]/td[4]/a").get_attribute("href")
+        company = tree.xpath('//markdown-accessiblity-table/table/tbody/tr[' + str(i) + ']/td/strong')[0].text_content()
+        role = tree.xpath('//markdown-accessiblity-table/table/tbody/tr[' + str(i) + ']/td[2]')[0].text_content()
+        location = tree.xpath('//markdown-accessiblity-table/table/tbody/tr[' + str(i) + ']/td[3]')[0].text_content()
+        application_link = tree.xpath('//markdown-accessiblity-table/table/tbody/tr[' + str(i) + ']/td[4]/a')[0].get('href')
         companies.append(company)
         roles.append(role)
         locations.append(location)
@@ -39,8 +33,6 @@ while i<=total_companies:
     elif visited:
         break
     i += 1
-
-driver.quit()
 
 print(companies)
 print(roles)
