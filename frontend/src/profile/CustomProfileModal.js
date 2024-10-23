@@ -15,13 +15,13 @@ const CustomProfileModal = (props) => {
 		} else {
 			axios
 				.post(
-					'http://localhost:5000/updateProfile',
+					'http://localhost:5001/profile',
 					{
 						...data
 					},
 					{
 						headers: {
-							userid: profile.id,
+							userid: localStorage.getItem('userId'),
 							Authorization: `Bearer ${localStorage.getItem('userId')}`
 						}
 					}

@@ -1,149 +1,104 @@
 import './static/App.css';
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Sidebar from './sidebar/Sidebar';
 import ApplicationPage from './application/ApplicationPage';
 import SearchPage from './search/SearchPage';
+import ExtensionDetails from './extensiondetails/Extensiondetails';
 import LoginPage from './login/LoginPage';
 import ManageResumePage from './resume/ManageResumePage';
 import ProfilePage from './profile/ProfilePage';
-import axios from 'axios';
 import MatchesPage from './matches/MatchesPage';
+import axios from 'axios';
 
-export default class App extends React.Component {
-	constructor(props) {
-		super(props);
-		let mapRouter = {
-			SearchPage: <SearchPage />,
-			ApplicationPage: <ApplicationPage />,
-			LoginPage: <LoginPage />,
-			ManageResumePage: <ManageResumePage />,
-			ProfilePage: <ProfilePage />,
-			MatchesPage: <MatchesPage />
-		};
-		this.state = {
-			currentPage: <LoginPage />,
-			mapRouter: mapRouter,
-			sidebar: false,
-			userProfile: null
-		};
-		this.sidebarHandler = this.sidebarHandler.bind(this);
-		this.updateProfile = this.updateProfile.bind(this);
-	}
+const App = () => {
+	const [currentPage, setCurrentPage] = useState(<LoginPage />);
+	const [userProfile, setUserProfile] = useState(null);
+	const [sidebar, setSidebar] = useState(false);
 
-	updateProfile = (profile) => {
-		console.log('Update Request: ', profile);
-		this.setState({
-			userProfile: profile,
-			currentPage: <ProfilePage profile={profile} updateProfile={this.updateProfile} />
-		});
-	};
+	useEffect(() => {
+		const token = localStorage.getItem('token');
+		const userId = localStorage.getItem('userId');
 
-	async componentDidMount() {
-		if (localStorage.getItem('token')) {
-			const userId = localStorage.getItem('userId');
-			await axios
-				.get('http://application-tracking-system-api-1:5000/getProfile', {
+		if (token && userId) {
+			axios
+				.get('http://localhost:5001/profile', {
 					headers: {
 						userid: userId,
-						Authorization: `Bearer ${localStorage.getItem('token')}`
+						Authorization: `Bearer ${token}`
 					}
 				})
 				.then((res) => {
-					this.sidebarHandler(res.data);
+					setUserProfile(res.data);
+					setCurrentPage(<ProfilePage profile={res.data} updateProfile={updateProfile} />);
+					setSidebar(true);
 				})
 				.catch((err) => console.log(err.message));
+		} else {
+			setCurrentPage(<LoginPage />);
 		}
-	}
+	}, []);
 
-	sidebarHandler = (user) => {
-		console.log(user);
-		this.setState({
-			currentPage: (
-				<ProfilePage profile={user} updateProfile={this.updateProfile.bind(this)} />
-			),
-			sidebar: true,
-			userProfile: user
-		});
+	const updateProfile = (profile) => {
+		console.log('Update Request: ', profile);
+		setUserProfile(profile);
+		setCurrentPage(<ProfilePage profile={profile} updateProfile={updateProfile} />);
 	};
 
-	handleLogout = () => {
+	const handleLogout = () => {
 		localStorage.removeItem('token');
 		localStorage.removeItem('userId');
-		this.setState({
-			sidebar: false
-		});
+		localStorage.removeItem('chrome-extension');
+		setSidebar(false);
+		setCurrentPage(<LoginPage />);
 	};
 
-	switchPage(pageName) {
-		const currentPage =
-			pageName == 'ProfilePage' ? (
-				<ProfilePage
-					profile={this.state.userProfile}
-					updateProfile={this.updateProfile.bind(this)}
-				/>
-			) : (
-				this.state.mapRouter[pageName]
-			);
-		this.setState({
-			currentPage: currentPage
-		});
-	}
-
-	render() {
-		var app;
-		// console.log(this.state.sidebar)
-		if (this.state.sidebar) {
-			app = (
-				<div className='main-page'>
-					<Sidebar
-						switchPage={this.switchPage.bind(this)}
-						handleLogout={this.handleLogout}
-					/>
-					<div className='main'>
-						<div className='content'>
-							<div className=''>
-								<h1
-									className='text-center'
-									style={{ marginTop: '2%', fontWeight: '300' }}
-								>
-									Application Tracking System
-								</h1>
-								{/* <span className="btn-icon ">
-                <button className="btn btn-danger btn-icon"><i className="fas fa-plus"></i>&nbsp;New</button>
-              </span> */}
-							</div>
-							{this.state.currentPage}
-						</div>
-					</div>
-				</div>
-			);
-		} else {
-			app = (
-				<div className='main-page'>
-					<div className='main'>
-						<div className='content'>
-							<h1
-								className='text-center'
-								style={{
-									marginTop: 30,
-									padding: 0.4 + 'em',
-									fontWeight: '300'
-								}}
-							>
-								Application Tracking System
-							</h1>
-							<div className=''>
-								{/* <span className="btn-icon ">
-              <button className="btn btn-danger btn-icon"><i className="fas fa-plus"></i>&nbsp;New</button>
-            </span> */}
-							</div>
-							<LoginPage side={this.sidebarHandler} />
-						</div>
-					</div>
-				</div>
-			);
+	const switchPage = (pageName) => {
+		switch (pageName) {
+			case 'ProfilePage':
+				setCurrentPage(<ProfilePage profile={userProfile} updateProfile={updateProfile} />);
+				break;
+			case 'ApplicationPage':
+				setCurrentPage(<ApplicationPage />);
+				break;
+			case 'SearchPage':
+				setCurrentPage(<SearchPage />);
+				break;
+			case 'ExtensionPage':
+				setCurrentPage(<ExtensionDetails />);
+				break;
+			case 'ManageResumePage':
+				setCurrentPage(<ManageResumePage />);
+				break;
+			case 'MatchesPage':
+				setCurrentPage(<MatchesPage />);
+				break;
+			default:
+				setCurrentPage(<ProfilePage profile={userProfile} updateProfile={updateProfile} />);
 		}
-		return app;
-	}
-}
+	};
+
+	return (
+		<Router>
+			<div className='main-page'>
+				{sidebar && <Sidebar switchPage={switchPage} handleLogout={handleLogout} />}
+				<div className='main'>
+					<div className='content'>
+						<Routes>
+							<Route path="/application" element={<ApplicationPage />} />
+							<Route path="/search" element={<SearchPage />} />
+							<Route path="/manage-resume" element={<ManageResumePage />} />
+							<Route path="/matches" element={<MatchesPage />} />
+							<Route path="/profile" element={<ProfilePage profile={userProfile} updateProfile={updateProfile} />} />
+							<Route path="/login" element={<LoginPage />} />
+							<Route path="/" element={currentPage} />
+							<Route path="*" element={<Navigate to="/" />} />
+						</Routes>
+					</div>
+				</div>
+			</div>
+		</Router>
+	);
+};
+
+export default App;

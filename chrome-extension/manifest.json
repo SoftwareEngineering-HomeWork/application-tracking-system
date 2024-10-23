@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Application Tracking chrome Extension",
+  "version": "1.0",
+  "description": "A simple Chrome extension that stores your application data.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://localhost:3000/*"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "permissions": ["storage", "tabs", "activeTab", "scripting"],
+  "externally_connectable": {
+  "matches": ["*://localhost/*"]
+}
+}
+

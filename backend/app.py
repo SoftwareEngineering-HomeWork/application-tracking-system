@@ -238,7 +238,7 @@ def create_app():
                 return jsonify({"error": "Username already exists"}), 400
             password = data["password"]
             password_hash = hashlib.md5(password.encode())
-            user = Users(
+            user = Users(x
                 id=get_new_user_id(),
                 fullName=data["fullName"],
                 username=data["username"],
@@ -282,7 +282,7 @@ def create_app():
 
             return jsonify(profileInformation)
         except:
-            return jsonify({"error": "Internal server error"}), 500
+            return jsonify({"error": "Internal server error, cannot get profile data"}), 500
 
     @app.route("/updateProfile", methods=["POST"])
     def updateProfilePreferences():
@@ -303,7 +303,7 @@ def create_app():
 
         except Exception as err:
             print(err)
-            return jsonify({"error": "Internal server error"}), 500
+            return jsonify({"error": "Internal server error, cannot update profile data"}), 500
 
     @app.route("/getRecommendations", methods=["GET"])
     def getRecommendations():
