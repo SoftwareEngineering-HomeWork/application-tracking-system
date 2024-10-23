@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; 
 import './ProfileCard.css';
 import profilePic from '../assets/profile-pic.png'; // Placeholder image
 

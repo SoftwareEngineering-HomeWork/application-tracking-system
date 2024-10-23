@@ -10,8 +10,9 @@ import Footer from './components/Footer';
 
 function App() {
   return (
+    <div>
+    <Header />
     <div className="app-container">
-      <Header />
       <Sidebar />
       <div className="main-content">
         <div className="top-left">
@@ -24,6 +25,7 @@ function App() {
         </div>
       </div>
       <Footer />
+    </div>
     </div>
   );
 }
