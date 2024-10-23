@@ -1,18 +1,11 @@
-// Listen for messages from the background script
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  console.log("Popup has received the data")
-    if (request.extensionDetails) {
-        displayDetails(request.extensionDetails);
-    }
+
+document.addEventListener("DOMContentLoaded", () => {
+  chrome.storage.local.get('extension', (result) => {
+    console.log("This is the stored data", result.extension);
+    displayDetails(result.extension);
+  });
 });
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   chrome.storage.local.get("extension", (result) => {
-//     if (result.data) {
-//       displayDetails(result.data);
-//     }
-//   });
-// });
 
 // Function to display the extension details
 function displayDetails(details) {
@@ -28,4 +21,3 @@ function displayDetails(details) {
         container.appendChild(detailDiv);
     });
 }
-

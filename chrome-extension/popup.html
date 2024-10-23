@@ -8,9 +8,23 @@
         body {
             font-family: Arial, sans-serif;
             padding: 10px;
+            background-color: #f4f4f4; /* Added background color */
+            color: #333; /* Added text color */
+        }
+        h1 {
+            color: #007bff; /* Added color for the header */
+            text-align: center; /* Centered the header */
         }
         .detail {
             margin-bottom: 10px;
+            padding: 10px; /* Added padding for details */
+            border: 1px solid #ccc; /* Added border */
+            border-radius: 5px; /* Rounded corners */
+            background-color: #fff; /* Background for details */
+        }
+        #detailsContainer {
+            max-width: 600px; /* Set a max width for the container */
+            margin: 0 auto; /* Center the container */
         }
     </style>
      <script src="./popup.js"></script>
@@ -18,5 +32,6 @@
 <body>
     <h1>Extension Details</h1>
     <div id="detailsContainer"></div>
+    <script src="./popup.js"></script>
 </body>
 </html>
