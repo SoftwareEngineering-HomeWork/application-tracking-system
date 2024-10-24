@@ -4,11 +4,11 @@ import './components.css';
 
 // Dummy API functions
 let skillsData = [
-  { id: 1, name: 'JavaScript', link: '/application-page' },
-  { id: 2, name: 'C#', link: '/csharp-page' },
-  { id: 3, name: 'C++', link: '/cpp-page' },
-  { id: 4, name: 'PHP', link: '/php-page' },
-  { id: 5, name: 'Web Development', link: '/web-dev-page' },
+  { id: 1, name: 'JavaScript' },
+  { id: 2, name: 'C#' },
+  { id: 3, name: 'C++' },
+  { id: 4, name: 'PHP' },
+  { id: 5, name: 'Web Development' },
 ];
 
 const fetchSkills = async () => {
@@ -21,7 +21,7 @@ const addSkill = async (newSkill) => {
   // Simulating API call
   await new Promise(resolve => setTimeout(resolve, 500));
   const newId = skillsData.length + 1;
-  const skillToAdd = { id: newId, name: newSkill, link: `/${newSkill.toLowerCase().replace(' ', '-')}-page` };
+  const skillToAdd = { id: newId, name: newSkill };
   skillsData.push(skillToAdd);
   return skillToAdd;
 };
@@ -45,13 +45,13 @@ function Skills() {
 
   return ( 
     <div className="card">
-      <h3>Skills required</h3>
+      <h3>Skills Required</h3>
       <div className="tags">
         {skills.map((skill) => (
-            <div className="tag">{skill.name}</div>
+            <div key={skill.id} className="tag">{skill.name}</div>
         ))}
       </div>
-      <form onSubmit={handleAddSkill} className="skills-form">
+      <form onSubmit={handleAddSkill} className="form">
         <input
           type="text"
           value={newSkill}
