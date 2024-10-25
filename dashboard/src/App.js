@@ -8,7 +8,7 @@ import ExperienceLevel from './components/ExperienceLevel';
 import Locations from './components/Locations';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import ApplicationPage from './components/ApplicationPage';
+import MatchesPage from './components/MatchesPage';
 
 function MainContent() {
   return (
@@ -34,7 +34,7 @@ function App() {
       <Sidebar />
         <Routes>
           <Route path="/" className="top-left" element={<MainContent />} />
-          <Route path="/application-page" element={<ApplicationPage />} />
+          <Route path="/matches" element={<MatchesPage />} />
         </Routes>
         </div>
       </div>

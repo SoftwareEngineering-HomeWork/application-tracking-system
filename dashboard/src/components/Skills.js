@@ -48,7 +48,7 @@ function Skills() {
       <h3>Skills Required</h3>
       <div className="tags">
         {skills.map((skill) => (
-            <div key={skill.id} className="tag">{skill.name}</div>
+            <div className="tag">{skill.name}</div>
         ))}
       </div>
       <form onSubmit={handleAddSkill} className="form">

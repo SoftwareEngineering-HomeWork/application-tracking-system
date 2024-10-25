@@ -47,7 +47,7 @@ function Locations() {
       <h3>Locations Required</h3>
       <div className="tags">
         {locations.map((location) => (
-          <div key={location.id} className="tag">{location.name}</div>
+          <div className="tag">{location.name}</div>
         ))}
       </div>
       <form onSubmit={handleAddLocation} className="form">
