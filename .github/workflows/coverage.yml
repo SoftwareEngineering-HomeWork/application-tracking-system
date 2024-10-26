@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@v4
 
       - name: Install dependencies
-        run: npm install
+        run: npm install vitest @vitest/coverage-v8
 
       - name: Run tests
         run: npx vitest run --coverage
