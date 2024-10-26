@@ -2,8 +2,9 @@ import requests
 from lxml import html
 from datetime import datetime
 from flask import Flask, jsonify, request
-
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 
 def fetch_swe_list():
     url = "https://github.com/SimplifyJobs/Summer2025-Internships"
@@ -17,6 +18,7 @@ def fetch_swe_list():
         current_date = datetime.now().strftime("%b %d")
         i = 1
         visited = False
+        latest_company = ""
         companies = []
         roles = []
         locations = []
@@ -25,10 +27,14 @@ def fetch_swe_list():
         while i<=total_listings:
             date_posted = tree.xpath('//markdown-accessiblity-table/table/tbody/tr[' + str(i) + ']/td[5]')[0].text_content()
             if date_posted == current_date:
-                company = tree.xpath('//markdown-accessiblity-table/table/tbody/tr[' + str(i) + ']/td/strong')[0].text_content()
+                company = tree.xpath('//markdown-accessiblity-table/table/tbody/tr[' + str(i) + ']/td')[0].text_content()
                 role = tree.xpath('//markdown-accessiblity-table/table/tbody/tr[' + str(i) + ']/td[2]')[0].text_content()
                 location = tree.xpath('//markdown-accessiblity-table/table/tbody/tr[' + str(i) + ']/td[3]')[0].text_content()
                 application_link = tree.xpath('//markdown-accessiblity-table/table/tbody/tr[' + str(i) + ']/td[4]/a')[0].get('href')
+                if company != "↳":
+                    latest_company = company
+                else:
+                    company = latest_company
                 companies.append(company)
                 roles.append(role)
                 locations.append(location)
