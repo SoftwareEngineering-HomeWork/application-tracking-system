@@ -10,6 +10,11 @@ const fetchMatches = async () => {
     { id: 1, name: 'John Doe', skills: ['JavaScript', 'React'], experience: 'Senior', location: 'Algeria', resumeUrl: 'https://example.com/resume1.pdf' },
     { id: 2, name: 'Jane Smith', skills: ['Python', 'Django'], experience: 'Mid-level', location: 'Angola', resumeUrl: 'https://example.com/resume2.pdf' },
     { id: 3, name: 'Bob Johnson', skills: ['Java', 'Spring'], experience: 'Junior', location: 'Algeria', resumeUrl: 'https://example.com/resume3.pdf' },
+    { id: 4, name: 'Alice Brown', skills: ['C#', 'ASP.NET'], experience: 'Mid-level', location: 'Australia', resumeUrl: 'https://example.com/resume4.pdf' },
+    { id: 5, name: 'Charlie Davis', skills: ['PHP', 'Laravel'], experience: 'Junior', location: 'Colombia', resumeUrl: 'https://example.com/resume5.pdf' },
+    { id: 6, name: 'David Lee', skills: ['PHP', 'Laravel'], experience: 'Junior', location: 'Colombia', resumeUrl: 'https://example.com/resume5.pdf' },
+    { id: 7, name: 'Eve Green', skills: ['PHP', 'Laravel'], experience: 'Junior', location: 'Colombia', resumeUrl: 'https://example.com/resume5.pdf' },
+
   ];
 };
 
