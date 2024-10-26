@@ -13,13 +13,14 @@ The process of applying for jobs and internships is not a cakewalk. Managing job
 
 Our application keeps track of the jobs you've added to your wish list. It also keeps track of the companies you've already applied to and keeps a list of any rejections. Rather than having the user browse each company's site for potential prospects, our application allows the applicant to search for them directly using basic keywords. Any prospective work offers can then be added to the applicant's wishlist.
 
-## New Features in Phase 3
-🎥[Phase-3 Demo Video](https://youtu.be/VKTob1N19ug)
 
-## ⭐ Highlight of Phase 3 ⭐
+## New Features in Phase 4
+🎥[Phase-4 Demo Video](https://youtu.be/VKTob1N19ug)
+
+## ⭐ Highlight of Phase 4 ⭐
 ### Dockerization 🗃️
-Containerizing the application with docker has helped us achieve 2 prominent things
-1. Significantly increasing the speed in which one would be able to setup the project on their machines.
+Restructuring the complete backend to implement an MVC based architecture and migrating the logic from Django to Node JS
+1. Significantly improved the speed in we can make API requests and use database drivers to access user and recruiter data
 2. Automation of the entire run of the application including running the tests!
 
 ### Other new features
@@ -27,8 +28,6 @@ Containerizing the application with docker has helped us achieve 2 prominent thi
 2. Bookmark option for the job recommendations
 3. Enhanced Search to fetch latest job opportunities
 4. Updated country list that now supports 120+ countries
-5. Updated skills list so that you can present your profile without missing on any skill
-6. Refactorization of Class components into functional components which makes the code more maintainable
 
 #### Bug fixes
 1. Undefined profile image.

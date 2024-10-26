@@ -193,8 +193,9 @@ const ApplicationPage = () => {
   useEffect(() => {
     // Fetch the list of applications from the backend API
     if (isChanged) {
-      fetch('http://127.0.0.1:5000/applications', {
+      fetch('http://127.0.0.1:5001/applications', {
         headers: {
+          userid: localStorage.getItem('userId'),
           Authorization: 'Bearer ' + localStorage.getItem('token'),
           'Access-Control-Allow-Origin': 'http://127.0.0.1:3000',
           'Access-Control-Allow-Credentials': 'true',
@@ -202,7 +203,11 @@ const ApplicationPage = () => {
         method: 'GET',
       })
         .then((response) => response.json())
-        .then((data) => setApplicationList(data));
+        .then((data) => 
+        {
+          console.log("This is the data we received from backend",data)
+          setApplicationList(data);
+        })
     }
   }, [isChanged]);
 
@@ -223,7 +228,7 @@ const ApplicationPage = () => {
       }
 
       if (application.id === null) {
-        fetch('http://127.0.0.1:5000/applications', {
+        fetch('http://127.0.0.1:5001/applications', {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token'),
             'Access-Control-Allow-Origin': 'http://127.0.0.1:3000',
@@ -249,7 +254,7 @@ const ApplicationPage = () => {
             alert('Adding application failed!')
           });
       } else {
-        fetch('http://127.0.0.1:5000/applications/' + application.id, {
+        fetch('http://127.0.0.1:5001/applications/' + application.id, {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token'),
             'Access-Control-Allow-Origin': 'http://127.0.0.1:3000',
@@ -282,7 +287,7 @@ const ApplicationPage = () => {
   );
 
   const handleDeleteApplication = (application) => {
-    fetch('http://127.0.0.1:5000/applications/' + application?.id, {
+    fetch('http://127.0.0.1:5001/applications/' + application?.id, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
         'Access-Control-Allow-Origin': 'http://127.0.0.1:3000',

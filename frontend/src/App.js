@@ -10,6 +10,7 @@ import ManageResumePage from './resume/ManageResumePage';
 import ProfilePage from './profile/ProfilePage';
 import MatchesPage from './matches/MatchesPage';
 import axios from 'axios';
+import SWEListings from './swe_list/SWE_Listings';
 
 const App = () => {
 	const [currentPage, setCurrentPage] = useState(<LoginPage />);
@@ -71,7 +72,7 @@ const App = () => {
 				setCurrentPage(<ManageResumePage />);
 				break;
 			case 'MatchesPage':
-				setCurrentPage(<MatchesPage />);
+				setCurrentPage(<SWEListings />);
 				break;
 			default:
 				setCurrentPage(<ProfilePage profile={userProfile} updateProfile={updateProfile} />);
@@ -91,6 +92,7 @@ const App = () => {
 							<Route path="/matches" element={<MatchesPage />} />
 							<Route path="/profile" element={<ProfilePage profile={userProfile} updateProfile={updateProfile} />} />
 							<Route path="/login" element={<LoginPage />} />
+							<Route path="/recruiter/login" element={<LoginPage />} />
 							<Route path="/" element={currentPage} />
 							<Route path="*" element={<Navigate to="/" />} />
 						</Routes>

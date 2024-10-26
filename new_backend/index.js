@@ -4,6 +4,7 @@ const cors = require('cors');
 const signupRouter = require('./routes/signup');
 const loginRouter = require('./routes/login');
 const profileRouter = require('./routes/profile');
+const applicationRouter=require('./routes/applications')
 const authmiddleware = require('./middlewares/authorization');
 const app = express();
 const port = 5001;
@@ -25,6 +26,7 @@ app.use(cors());
 app.use('/users/signup', signupRouter);
 app.use('/users/login', loginRouter);
 app.use('/profile',profileRouter);
+app.use('/applications',applicationRouter)
 
 app.get('/', (req, res) => {
   res.send('Welcome to the Application Tracking Systems API');
