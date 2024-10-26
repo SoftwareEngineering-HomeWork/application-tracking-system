@@ -46,7 +46,7 @@ function MatchesPage() {
       <h1>Recommended Candidates</h1>
       <div className="matches-list">
         {matches.map(match => (
-          <div key={match.id} className="match-card">
+          <div key={match.id} className="match-card" data-testid="match-card">
             <div className="match-header">
               <h2>{match.name}</h2>
                 <p>Experience: {match.experience}</p>
