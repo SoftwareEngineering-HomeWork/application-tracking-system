@@ -11,6 +11,7 @@ def fetch_swe_list():
 
     try:
         response = requests.get(url)
+        response.raise_for_status()
         tree = html.fromstring(response.content)
         listings = tree.xpath('//markdown-accessiblity-table/table/tbody/tr')
         total_listings = len(listings)
@@ -47,21 +48,24 @@ def fetch_swe_list():
     
     except requests.exceptions.RequestException as e:
         print(f"Error fetching data: {e}")
-        return [], [], [], []
+        raise Exception(f"Error fetching data: {str(e)}")
     
     except Exception as e:
         print(f"Unexpected error: {e}")
-        return [], [], [], []
-
+        raise Exception(f"Unexpected error: {str(e)}")
+    
 @app.route('/swe-lists', methods=['GET'])
 def get_lists():
-    companies, roles, locations, application_links = fetch_swe_list()
-    return jsonify({
-        "companies": companies,
-        "roles": roles,
-        "locations": locations,
-        "application_links": application_links
-    }), 200
+    try:
+        companies, roles, locations, application_links = fetch_swe_list()
+        return jsonify({
+            "companies": companies,
+            "roles": roles,
+            "locations": locations,
+            "application_links": application_links
+        }), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5002,debug=True) 
