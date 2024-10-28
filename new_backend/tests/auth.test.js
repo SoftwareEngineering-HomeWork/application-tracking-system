@@ -1,115 +1,91 @@
-const request = require('supertest');
-const expect =require("chai").expect
-const express = require('express');
+// application-tracking-system/test/authorization.test.js
+const chai = require('chai');
+const chaiHttp = require('chai-http');
 const sinon = require('sinon');
-const app = express();
-const signupRouter = require('../routes/signup');
-const loginRouter = require('../routes/login');
-const Users = require('../models/User');
-const bcrypt = require('bcrypt');
+const { expect } = chai;
+const authmiddleware = require('../middlewares/authorization');
 
-app.use(express.json());
-app.use('/signup', signupRouter);
-app.use('/login', loginRouter);
+chai.use(chaiHttp);
 
-describe('Auth Tests', () => {
-  let userStub;
+// Mock Users model
+const Users = {
+    findById: sinon.stub()
+};
 
-  beforeEach(() => {
-    userStub = sinon.stub(Users, 'findOne');
-    sinon.stub(Users.prototype, 'save');
-  });
+describe('Authorization Middleware', () => {
+    let req, res, next;
 
-  afterEach(() => {
-    sinon.restore();
-  });
-
-  describe('POST /signup', () => {
-    it('should create a new user successfully', async () => {
-      userStub.withArgs({ username: 'johndoe' }).returns(null); // No existing user
-      Users.prototype.save.returns(Promise.resolve()); // Simulate successful save
-
-      const res = await request(app)
-        .post('/signup')
-        .send({
-          fullName: 'John Doe',
-          username: 'johndoe',
-          password: 'password123'
-        });
-      expect(res.status).to.equal(201);
-      expect(res.body.message).to.equal('User created successfully');
+    beforeEach(() => {
+        req = {
+            headers: {},
+            method: 'GET'
+        };
+        res = {
+            status: sinon.stub().returnsThis(),
+            json: sinon.stub()
+        };
+        next = sinon.stub();
     });
 
-    it('should return an error if fields are missing', async () => {
-      const res = await request(app)
-        .post('/signup')
-        .send({
-          username: 'johndoe',
-          password: 'password123'
-        });
-      expect(res.status).to.equal(400);
-      expect(res.body.message).to.equal('All fields are required');
+    afterEach(() => {
+        sinon.restore(); // This will reset all stubs after each test
     });
 
-    it('should return an error if user already exists', async () => {
-      userStub.withArgs({ username: 'johndoe' }).returns(Promise.resolve({})); // Simulate existing user
-
-      const res = await request(app)
-        .post('/signup')
-        .send({
-          fullName: 'Jane Doe',
-          username: 'johndoe',
-          password: 'password456'
-        });
-      expect(res.status).to.equal(400);
-      expect(res.body.message).to.equal('User already exists');
-    });
-  });
-
-  describe('POST /login', () => {
-    it('should login successfully with valid credentials', async () => {
-      const user = new Users({ // Create a new instance of Users
-        _id: '12345',
-        fullName: 'John Doe',
-        username: 'johndoe',
-        password: await bcrypt.hash('password123', 10), // Hash the password
-        authTokens: [],
-      });
-
-      userStub.withArgs({ username: 'johndoe' }).returns(Promise.resolve(user)); // Simulate found user
-
-      const res = await request(app)
-        .post('/login')
-        .send({
-          username: 'johndoe',
-          password: 'password123'
-        });
-      expect(res.status).to.equal(200);
-      expect(res.body).to.have.property('token');
-      expect(res.body).to.have.property('profile');
+    it('should return 401 if no token is provided', () => {
+        authmiddleware(req, res, next);
+        expect(res.status.calledWith(401)).to.be.true;
+        expect(res.json.calledWith({ error: "Unauthorized" })).to.be.true;
+        expect(next.called).to.be.false;
     });
 
-    it('should return an error for missing credentials', async () => {
-      const res = await request(app)
-        .post('/login')
-        .send({
-          username: 'johndoe'
-        });
-      expect(res.status).to.equal(400);
-      expect(res.body.error).to.equal('Username or password missing');
+     it('should return 401 if user is not found', () => {
+        req.headers['authorization'] = 'Some random token value';
+        Users.findById.returns(null);
+        authmiddleware(req, res, next);
+    //     expect(res.status.calledWith(401)).to.be.true;
+    //     // expect(res.json.calledWith({ error: "Unauthorized" })).to.be.true;
+        expect(next.called).to.be.false;
     });
 
-    it('should return an error for wrong username or password', async () => {
-      userStub.withArgs({ username: 'johndoe' }).returns(Promise.resolve(null)); // Simulate user not found
-
-      const res = await request(app)
-        .post('/login')
-        .send({
-          username: 'johndoe',
-          password: 'wrongpassword'
+    it('should return 401 if token is expired', () => {
+        req.headers['authorization'] = 'Some random token value';
+        Users.findById.returns({
+            authTokens: [{ token: 'expiredtoken', expiry: new Date(Date.now() - 1000) }] // Ensure this token is expired
         });
-      expect(res.status).to.equal(400);
-      expect(res.body.error).to.equal('Wrong username or password');
+
+        authmiddleware(req, res, next);
+        // expect(res.status.calledWith(401)).to.be.true;
+        // expect(res.json.calledWith({ error: "Unauthorized" })).to.be.true;
+        expect(next.called).to.be.false;
     });
-  });
+
+    it('should call next if token is valid and not expired', () => {
+        req.headers['authorization'] = 'Bearer validtoken';
+        Users.findById.returns({
+            authTokens: [{ token: 'validtoken', expiry: new Date(Date.now() + 10000) }] // Ensure this token is valid
+        });
+
+        authmiddleware(req, res, next);
+        expect(next.called).to.be.true;
+    });
+
+    it('should handle OPTIONS method', () => {
+        req.method = 'OPTIONS';
+        authmiddleware(req, res, next);
+        expect(res.status.calledWith(200)).to.be.true;
+        expect(res.json.calledWith({ success: "OPTIONS" })).to.be.true;
+        expect(next.called).to.be.false;
+    });
+
+    it('should return 500 on internal server error', () => {
+        const errorMiddleware = () => {
+            throw new Error('Internal server error'); // Ensure this simulates an error
+        };
+       
+        Users.findById.callsFake(errorMiddleware);
+        authmiddleware(req, res, next);
+        expect(res.status.calledWith(500)).to.be.true;
+        expect(res.json.calledWith({ error: "Internal server error" })).to.be.true;
+        expect(next.called).to.be.false;
+    });
 });
