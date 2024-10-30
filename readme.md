@@ -283,10 +283,9 @@ Please see our CONTRIBUTING.md for instructions on how to contribute to the repo
 
 ## Team Members
 
-- Akhilesh Neeruganti
-- Jash Gopani
-- Hemil Mehta
-- Rohan Ajmera
+- Dhruv Soni
+- Sweekar Burji
+- Prithish Samanta
 
 ## Contact Info
-For any questions, please email neerua08@gmail.com.
+For any questions, please email dhruvsoni1802@gmail.com.
