@@ -233,9 +233,6 @@ Currently, we have these fundamental steps in our project:
 ### Hosted database with MongoDB Atlas:
 
 1. [Create account](https://account.mongodb.com/account/register) for MongoDB
-
-- **If current MongoDB Atlas owner adds your username/password to the cluster, skip to step 4** \*
-
 2. Follow MongoDB Atlas [Setup Guide](https://docs.atlas.mongodb.com/getting-started/) to create a database collection for hosting applications
 3. Create .env file in the new_backend folder with the following content:
    ```
