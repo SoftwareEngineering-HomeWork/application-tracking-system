@@ -195,17 +195,20 @@ Currently, we have these fundamental steps in our project:
 - Flask
 - MongoDB
 - React
-- Docker
 - Express JS
 - HTML
 - CSS
+- Mocha
+- Chai
+- Cypress
 
 ## Installation:
 
 ### Requirements:
 
 - [npm](https://nodejs.org/en/) (Latest version 6.14.4 used as of 11/3)
-- 
+- [node](https://nodejs.org/en) (Latesrt version 23.1.0)
+- [MongoDB Community Edition or use MongoDB Atlas](https://www.mongodb.com/docs/manual/administration/install-community/)
 
 ### Steps to follow for the installation:
 
@@ -227,17 +230,6 @@ Currently, we have these fundamental steps in our project:
 
 ## Hosting the Database:
 
-### Local MongoDB:
-
-1. Download [MongoDB Community Server](https://docs.mongodb.com/manual/administration/install-community/)
-2. Follow the [Installion Guide](https://docs.mongodb.com/guides/server/install/)
-3. In app.py set 'host' string to 'localhost'
-4. Run the local database:
-
-mongodb
-
-- Recommended: Use a GUI such as [Studio 3T](https://studio3t.com/download/) to more easily interact with the database
-
 ### Hosted database with MongoDB Atlas:
 
 1. [Create account](https://account.mongodb.com/account/register) for MongoDB
@@ -245,22 +237,10 @@ mongodb
 - **If current MongoDB Atlas owner adds your username/password to the cluster, skip to step 4** \*
 
 2. Follow MongoDB Atlas [Setup Guide](https://docs.atlas.mongodb.com/getting-started/) to create a database collection for hosting applications
-3. Create application.yml in the backend folder with the following content:
+3. Create .env file in the new_backend folder with the following content:
    ```
-   GOOGLE_CLIENT_ID : <Oauth Google ID>
-   GOOGLE_CLIENT_SECRET : <Oauth Google Secret>
-   CONF_URL : https://accounts.google.com/.well-known/openid-configuration
-   SECRET_KEY : <Any Secret You Want>
-   USERNAME : <MongoDB Atlas Username>
-   PASSWORD : <MongoDB Atlas Password>
-   CLUSTER_URL : <MongoDB Cluster URL>
+   MONGO_URI : <MongoDB Cluster URL>
    ```
-4. In app.py set 'host' string to your MongoDB Atlas connection string. Replace the username and password with {username} and {password} respectively
-6. For testing through CI to function as expected, repository secrets will need to be added through the settings. Create individual secrets with the following keys/values:
-
-MONGO_USER: <MongoDB Atlas cluster username>
-MONGO_PASS: <MongoDB Atlas cluster password>
-
 ## License
 
 The project is licensed under the [MIT](https://choosealicense.com/licenses/mit/) license.
