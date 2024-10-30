@@ -169,16 +169,13 @@ On this page, user can see different jobs that would be recommended to them base
 
 
 
-
 ## Future Scope:
 
-- Include deadline reminders for the application and interview.
-- Add a feature that allows users to attach these reminders to their Google calendar.
-- Incorporate notifications for upcoming deadlines.
-- Include a link to the university’s career fair page.
+- Add a feature that allows users to attach interview reminders to their Google calendar.
 - Direct connection to Linkedin, allowing for the addition of job opportunities to the wishlist.
-- An option to maintain separate profiles for job tracking.
-- Integrate the database into docker
+- Improve the recruiter dashboard to include filtering based on more features such as online assessments,education etc
+- Enhance chrome extension to allow injecting the data directly to the required fields and thus removing the need to copy and paste content
+- Make v2 of web scraping which collects data from more public APIs
 
 ## Explanation:
 
@@ -207,35 +204,26 @@ Currently, we have these fundamental steps in our project:
 
 ### Requirements:
 
-- [Python](https://www.python.org/downloads/) (recommended >= 3.8)
-- [pip](https://pip.pypa.io/en/stable/installation/) (Latest version 21.3 used as of 11/3)
 - [npm](https://nodejs.org/en/) (Latest version 6.14.4 used as of 11/3)
-- [Docker-Desktop](https://www.docker.com/products/docker-desktop/) (Latest version as of 11/27)
+- 
 
 ### Steps to follow for the installation:
 
 1. **Clone the Repository**
-    - Use the command `git clone https://github.com/jashgopani/application-tracking-system.git` to clone the repository.
+    - Use the command `git clone https://github.com/SoftwareEngineering-HomeWork/application-tracking-system.git` to clone the repository.
 
-2. **Start the Docker Engine**
-    - Ensure that Docker is installed on your system. If not, you can download it from the official Docker website.
-    - Start the Docker engine on your machine. The command varies based on your operating system.
+2. **Start the Backend**
+    - Ensure that node is installed on your system. If not, you can download it from the official Node JS website.
+    - Change directory to new_backend
+    - Run the command 'npm start'
 
-3. **Build Images**
-    - Navigate to the backend folder and build the image for the API using the following command:
-        ```
-        docker build -f dockerfile.api -t ats-api .
-        ```
-    - Similarly, navigate to the frontend folder and build the image for the client using the following command:
-        ```
-        docker build -f dockerfile.client -t ats-client .
-        ```
+3. **Start the backend for web scraping**
+    - Navigate to the scraping folder and start the backend using the following command:
+         
 
-4. **Run Docker Compose**
-    - Finally, run the following command to start the application:
-        ```
-        docker-compose up
-        ```
+4. **Start frontend**
+     - Change directory to frontend
+    - Run the command 'npm start'
 
 ## Hosting the Database:
 
