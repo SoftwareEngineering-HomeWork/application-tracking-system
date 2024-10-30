@@ -20,74 +20,68 @@ Our application keeps track of the jobs you've added to your wish list. It also 
 ## ⭐ Highlight of Phase 4 ⭐
 In Phase 4 of this project, we undertook a significant overhaul of both the backend and frontend to enhance maintainability, scalability, and performance. This document outlines the key improvements, new features, and technical changes made during this phase.
 
-Phase 4 Highlights
-1. Backend Transformation: From Flask/Django to Node.js
-The previous backend was implemented in a mix of Flask/Django frameworks, resulting in complexity and code duplication across multiple modules. We have now transitioned the entire backend to Node.js. Below are the key benefits of this migration:
 
-Benefits of Moving to Node.js
-Unified Language: Both the frontend (React/JavaScript) and backend now use JavaScript, streamlining development and allowing for code reuse.
-Asynchronous Non-blocking I/O: Node.js supports asynchronous programming, improving performance by handling multiple requests concurrently.
-Scalability: Node’s event-driven architecture makes it more suitable for microservices, allowing the application to scale efficiently.
-Extensive Package Ecosystem: Leveraged npm (Node Package Manager) for faster development with access to numerous libraries and modules.
-Reduced Overhead: Node.js eliminates the need for heavyweight frameworks like Django, offering a leaner setup that is easier to maintain.
-Revised Backend Architecture: MVC Microservices
+## 1. Backend Transformation: From Flask to Node.js
+The previous backend was implemented in Flask framework, resulting in complexity and code duplication across multiple modules. We have now transitioned the entire backend to Node.js. Below are the key benefits of this migration:
+
+## Benefits of Moving to Node.js
+1) Unified Language: Both the frontend (React/JavaScript) and backend now use JavaScript, streamlining development and allowing for code reuse.
+2) Asynchronous Non-blocking I/O: Node.js supports asynchronous programming, improving performance by handling multiple requests concurrently.
+3) Extensive Package Ecosystem: Leveraged npm (Node Package Manager) for faster development with access to numerous libraries and modules.
+4) Reduced Overhead: Node.js eliminates the need for heavyweight frameworks like Django, offering a leaner setup that is easier to maintain.
+
+## Revised Backend Architecture: MVC model
 The original backend consisted of over 800 lines of tightly coupled code, making it difficult to debug and extend. The codebase has now been modularized into Model-View-Controller (MVC) microservices architecture.
 
-Separation of Concerns: Each component (Models, Controllers, Views) has a distinct role, promoting clean code and maintainability.
-Independent Microservices: Business logic is divided into modular microservices (e.g., User Service, Job Service, Recruiter Service) that communicate via APIs, allowing for easier debugging and future expansion.
-API Gateway: Centralized routing for all microservices, improving security and simplifying external communication.
+1) Separation of Concerns: Each component (Models, Controllers, Views) has a distinct role, promoting clean code and maintainability.
+2) Independent Microservices: Business logic is divided into modules that communicate via APIs, allowing for easier debugging and future expansion.
+3) API Gateway: Centralized routing for all route handlers, improving security and simplifying external communication.
+   
 This refactoring also improved the backend-frontend integration. We updated outdated package dependencies across both layers to eliminate compatibility issues that previously caused communication failures between the two.
 
-2. New Feature: Recruiter Dashboard
-A key addition in Phase 4 is the Recruiter Dashboard. This feature allows recruiters to filter and fetch candidate profiles that match job descriptions using advanced search parameters.
+## 2. New Feature: Recruiter Dashboard
+A key addition in Phase 4 is the Recruiter Dashboard. This feature allows recruiters to filter and fetch candidate profiles that match job descriptions using search parameters.
 
 Technical Details
+
 Search Functionality:
-Uses MongoDB Aggregation Pipelines to perform complex searches on candidate profiles (e.g., filtering by skills, experience, location).
-Implements full-text search and fuzzy matching to handle spelling variations and synonyms.
-Authentication and Authorization:
-Secure access through JWT-based authentication.
-Role-based authorization ensures that only users with recruiter privileges can access this feature.
-Data Caching:
-Frequently accessed data is cached using Redis, reducing database load and improving response times.
-UI/UX: Built using React.js with intuitive filters and quick profile previews for a seamless recruiter experience.
-3. Chrome Extension: Smart Application Helper
-We also developed a Chrome Extension to assist users in filling out job applications efficiently. This extension saves users' job-related information and autofills applications to reduce repetitive tasks.
+- Uses MongoDB Aggregation Pipelines to perform complex searches on candidate profiles (e.g., filtering by skills, experience, location).
+- Secure access through JWT-based authentication.
+- Role-based authorization ensures that only users with recruiter privileges can access this feature.
+- UI/UX: Built using React.js with intuitive filters and quick profile previews for a seamless recruiter experience.
+
+## 3. Chrome Extension: Smart Application Helper
+We also developed a Chrome Extension to assist users in filling out job applications efficiently. This extension saves users' job-related information and helps filling applications to reduce repetitive tasks.
 
 How the Chrome Extension Works
-Content Script:
 
-Injects JavaScript into the web pages of job application portals.
-Monitors form fields on the page and detects matching input fields (e.g., name, email, work experience).
-Uses stored user data to autofill these fields when possible.
-Service Worker:
+1) Content Script:
+Injects JavaScript into the JTracker.
+Uses localstorage to access data and look out for changes in some input fields
+Sends data to the background service worker
 
+
+2) Service Worker:
 Runs in the background and handles communication between the extension popup, content scripts, and backend.
-Manages events like receiving updates from the backend (e.g., new job matches) and relays them to the extension.
-Handles API calls to sync data between the browser and the backend.
-Storage:
+Manages events like receiving updates from the content script and relays them to the popup.
 
-User information is saved locally using Chrome's storage API (with encryption) to ensure security.
+
+3) Storage:
+User information is saved locally using Chrome's storage API
 Provides a convenient UI for users to edit and manage their stored data via the extension popup.
 This extension improves the user experience by streamlining job applications and reducing manual effort, making it a practical companion for active job seekers.
 
-4. Web Scraping for Daily Job Recommendations
+## 4. Web Scraping for Daily Job Recommendations
 To keep users informed about the latest job openings, we implemented a web scraping module that provides daily job recommendations.
 
 Technical Details
 Scraping Strategy:
 
-Uses Puppeteer (a Node.js library) to automate job search on various job boards and scrape job listings.
-Extracts relevant job information (title, company, location, description) and stores it in the backend.
-Frequency and Caching:
-
 The scraping runs on a scheduled cron job to fetch new listings daily.
-To prevent scraping the same listings multiple times, previously fetched jobs are cached and tracked in the database.
-Recommendation Logic:
+It uses publicly available APIs and github repositories to fetch accurate data related to internship postings
 
-User preferences (e.g., location, job type, skills) are matched against the scraped job listings.
-Personalized job recommendations are delivered via email notifications or displayed on the dashboard.
-Summary
+
+## Summary
 In Phase 4, we successfully transformed the job tracker application into a more maintainable, scalable, and feature-rich platform. The migration to Node.js, restructuring of the backend into a microservices-based MVC architecture, and the addition of new functionalities such as the Recruiter Dashboard and Chrome Extension have significantly enhanced both developer and user experiences. Our daily job recommendations feature ensures users are always up to date with the latest opportunities.
 
 These improvements lay the foundation for future growth, making the platform well-suited for continuous enhancement and scaling as new requirements arise.
