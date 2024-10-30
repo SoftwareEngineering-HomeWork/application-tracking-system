@@ -118,12 +118,12 @@ https://user-images.githubusercontent.com/89501363/144725439-5d9191f8-df13-4814-
 
 ### Login Page / Signup Page
 
-The introductory visual interface displayed from which a user is able to register and log into the application. User can also login or sign up through Google Authorization.
+The introductory visual interface displayed from which a user is able to register and log into the application. 
+![image](https://github.com/user-attachments/assets/22090e96-9356-4256-9180-86ada115f8c9)
 
-<p align="center"><img width="700" src="./resources/login_page.png"></p>
-The Google Authorization Login:
+![image](https://github.com/user-attachments/assets/df60db51-e533-489e-bac6-659d252c4468)
 
-<p align="center"><img width="700" src="./resources/googleauth.png"></p>
+
 
 ### HomeScreen - Profile Page
 
