@@ -164,6 +164,9 @@ On this page, user can see different jobs that would be recommended to them base
 ![image](https://github.com/user-attachments/assets/283a83cd-48c0-4414-8e2a-d90e3a52fc2e)
 
 ## Recruitor Dashboard
+![image](https://github.com/user-attachments/assets/6ac9e593-ad88-401a-9894-0f00a7d400ed)
+![image](https://github.com/user-attachments/assets/5b4bb569-1fe3-4cfb-b7d4-fa1266f04661)
+
 
 
 
