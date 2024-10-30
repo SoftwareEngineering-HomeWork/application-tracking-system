@@ -130,7 +130,8 @@ The introductory visual interface displayed from which a user is able to registe
 After Logging In, the Profile page of the user is displayed where the user details such as Name, Institution, email, phone number, address, skills, and more are shown.
 Users can add or update information to their profile, such as their personal information, skills, preferred job locations, and their experience level.
 
-<p align="center"><img width="700" src="./resources/profilepage.png"></p>
+![image](https://github.com/user-attachments/assets/0fa1e5ec-d6d1-4980-98c5-c4a7eff055c8)
+
 
 ### SearchPage
 
@@ -148,6 +149,9 @@ The interface through which a user is able to search for specific jobs and apply
 
 The user is able to access different saved applications - Waitlisted applications, Waiting for Refereals, Applied Jobs, Application Status. The user can also add more jobs to track through this screen.
 
+![image](https://github.com/user-attachments/assets/e2e8a374-1a4f-49bd-8386-77eee2419cb4)
+
+
 <p align="center"><img width="700" src="./resources/AddApplicationpage.png"></p>
 
 ### MatchesPage
@@ -155,6 +159,13 @@ The user is able to access different saved applications - Waitlisted application
 On this page, user can see different jobs that would be recommended to them based on their profile and their preferences. User can apply for that position from this page too.
 
 <p align="center"><img width="700" src="./resources/Recommendjobspage.png"></p>
+
+## Chrome extension
+![image](https://github.com/user-attachments/assets/283a83cd-48c0-4414-8e2a-d90e3a52fc2e)
+
+## Recruitor Dashboard
+
+
 
 ## Future Scope:
 
@@ -168,12 +179,14 @@ On this page, user can see different jobs that would be recommended to them base
 
 ## Explanation:
 
-Currently, we have four fundamental steps in our project:
+Currently, we have these fundamental steps in our project:
 
 1. The SearchPage where users can search about the Job Postings
-2. The MatchesPage where users get recommendation about the jobs according to their preferences
+2. The MatchesPage where users get recommendation about the jobs based on daily postings
 3. The ApplicationsPage where users can add and see the position they applied to and can update/delete the the information. Any details in any table can be modified at any time during the process
 4. The ProfilePage where user can add his skills, experience level and preffered location. This information is used to recommend user jobs that require similar skillsets
+5. A chrome extension where user can add details and use these details which filling up their job applications
+6. A recruitor dashboard where based on the requirements of the recruitor, potential candidate matches are returned
 
 ## Technologies Used:
 
@@ -183,6 +196,9 @@ Currently, we have four fundamental steps in our project:
 - MongoDB
 - React
 - Docker
+- Express JS
+- HTML
+- CSS
 
 ## Installation:
 
