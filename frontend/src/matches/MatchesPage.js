@@ -48,9 +48,9 @@ const Recommendations = () => {
 
 	return (
 		<div>
-			<h2 class='d-flex justify-content-center my-5'>Recommended Jobs</h2>
+			<h2 className='d-flex justify-content-center my-5'>Recommended Jobs</h2>
 			<table
-				classname='table my-4'
+				className='table my-4'
 				style={{
 					boxShadow: '0px 5px 12px 0px rgba(0,0,0,0.1)',
 					marginTop: 30,
