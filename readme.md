@@ -6,6 +6,8 @@
 [![GitHub issues](https://img.shields.io/github/issues/SoftwareEngineering-HomeWork/application-tracking-system)](https://github.com/jashgopani/application-tracking-system/issues)
 [![Github closes issues](https://img.shields.io/github/issues-closed-raw/SoftwareEngineering-HomeWork/application-tracking-system)](https://github.com/jashgopani/application-tracking-system/issues?q=is%3Aissue+is%3Aclosed)
 ![GitHub top language](https://img.shields.io/github/languages/top/SoftwareEngineering-HomeWork/application-tracking-system)
+![Code Formatter](https://github.com/username/repo/actions/workflows/formatter.yml/badge.svg)
+
 
 <p align="center"><img width="700" src="./resources/ApplicationTrackingAnimation.gif"></p>
 
