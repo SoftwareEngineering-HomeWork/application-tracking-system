@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './components.css';
 
-// Dummy API functions
 let locationsData = [
   { id: 1, name: 'Algeria' },
   { id: 2, name: 'Angola' },
@@ -11,13 +10,11 @@ let locationsData = [
 ];
 
 const fetchLocations = async () => {
-  // Simulating API call
   await new Promise(resolve => setTimeout(resolve, 500));
   return locationsData;
 };
 
 const addLocation = async (newLocation) => {
-  // Simulating API call
   await new Promise(resolve => setTimeout(resolve, 500));
   const newId = locationsData.length + 1;
   const locationToAdd = { id: newId, name: newLocation };
@@ -47,7 +44,7 @@ function Locations() {
       <h3>Locations Required</h3>
       <div className="tags">
         {locations.map((location) => (
-          <div className="tag">{location.name}</div>
+          <div key={location.id} className="tag">{location.name}</div>
         ))}
       </div>
       <form onSubmit={handleAddLocation} className="form">

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './MatchesPage.css';
-import { FaFileAlt } from 'react-icons/fa'; // Make sure to install react-icons
+import { FaFileAlt } from 'react-icons/fa'; 
 
-// Updated dummy API function
 const fetchMatches = async () => {
-  // Simulating API call
   await new Promise(resolve => setTimeout(resolve, 1000));
   return [
     { id: 1, name: 'John Doe', skills: ['JavaScript', 'React'], experience: 'Senior', location: 'Algeria', resumeUrl: 'https://example.com/resume1.pdf' },

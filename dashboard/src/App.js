@@ -9,7 +9,8 @@ import Locations from './components/Locations';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import MatchesPage from './components/MatchesPage';
-import LoginPage from './components/LoginPage';
+// import LoginPage from './components/LoginPage';
+
 function MainContent() {
   return (
     <div className="main-content">
@@ -25,6 +26,7 @@ function MainContent() {
 
   );
 }
+
 function App() {
   return (
     <Router>

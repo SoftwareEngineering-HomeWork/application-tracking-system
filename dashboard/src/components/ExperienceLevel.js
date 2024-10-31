@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './components.css';
 
-// Dummy API functions
 let experienceLevelsData = [
   { id: 1, name: 'Associate' },
   { id: 2, name: 'Senior' },
@@ -9,13 +8,11 @@ let experienceLevelsData = [
 ];
 
 const fetchExperienceLevels = async () => {
-  // Simulating API call
   await new Promise(resolve => setTimeout(resolve, 500));
   return experienceLevelsData;
 };
 
 const addExperienceLevel = async (newLevel) => {
-  // Simulating API call
   await new Promise(resolve => setTimeout(resolve, 500));
   const newId = experienceLevelsData.length + 1;
   const levelToAdd = { id: newId, name: newLevel };

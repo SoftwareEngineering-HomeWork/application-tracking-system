@@ -86,7 +86,7 @@ const LoginPage = (props) => {
 					<Tab eventKey='login' title='Login'>
 						<form>
 							<div className='form-group my-4'>
-								<label>Username</label>
+								<label htmlFor="uname">Username</label>
 								<input
 									type='text'
 									className='form-control'
@@ -96,7 +96,7 @@ const LoginPage = (props) => {
 							</div>
 
 							<div className='form-group my-4'>
-								<label>Password</label>
+								<label htmlFor="pwd">Password</label>
 								<input
 									type='password'
 									className='form-control'
@@ -124,16 +124,16 @@ const LoginPage = (props) => {
 					<Tab eventKey='signup' title='Signup'>
 						<form>
 							<div className='form-group my-4'>
-								<label>Username</label>
+								<label htmlFor="suname">Username</label>
 								<input
 									type='text'
 									className='form-control'
 									id='suname'
-									placeholder='Enter companyname'
+									
 								/>
 							</div>
 							<div className='form-group my-4'>
-								<label>Password</label>
+								<label htmlFor="spwd">Password</label>
 								<input
 									type='password'
 									className='form-control'

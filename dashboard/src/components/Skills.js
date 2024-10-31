@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import './components.css';
 
 // Dummy API functions
@@ -48,7 +47,7 @@ function Skills() {
       <h3>Skills Required</h3>
       <div className="tags">
         {skills.map((skill) => (
-            <div className="tag">{skill.name}</div>
+            <div key={skill.id} className="tag">{skill.name}</div>
         ))}
       </div>
       <form onSubmit={handleAddSkill} className="form">
