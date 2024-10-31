@@ -11,6 +11,7 @@ export default class CardEdit extends Component {
       jobTitle: props.application.jobTitle,
       companyName: props.application.companyName,
       date: props.application.date,
+      interviewdate: props.application.interviewdate,
       jobLink: props.application.jobLink,
       location: props.application.location,
       class: props.application.status
@@ -94,6 +95,10 @@ export default class CardEdit extends Component {
               </div>
               <div className='form-group'>
                 <label htmlFor='date' className='col-form-label'>Date</label>
+                <input type='date' className='form-control' id='date' value={this.state.date} onChange={this.handleChange.bind(this)} />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='date' className='col-form-label'>Interview Date</label>
                 <input type='date' className='form-control' id='date' value={this.state.date} onChange={this.handleChange.bind(this)} />
               </div>
               <div className='form-group'>

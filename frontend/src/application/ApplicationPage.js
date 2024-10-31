@@ -9,6 +9,7 @@ const ApplicationsList = ({ applicationList, handleCardClick, selectedApplicatio
   const [location, setLocation] = useState();
   const [status, setStatus] = useState();
   const [date, setDate] = useState();
+  const [interviewdate, setInterviewdate] = useState();
   const [jobLink, setJobLink] = useState();
   const [isCreate, setIsCreate] = useState();
 
@@ -131,6 +132,11 @@ const ApplicationsList = ({ applicationList, handleCardClick, selectedApplicatio
                 </div>
 
                 <div className='form-group'>
+                  <label className='col-form-label'>Interview Date</label>
+                  <input type='date' className='form-control' id='interviewdate' value={interviewdate} onChange={(e) => setInterviewdate(e.target.value)} />
+                </div>
+
+                <div className='form-group'>
                   <label className='col-form-label'>Job Link</label>
                   <input type='text' className='form-control' id='jobLink' placeholder='Job Link' value={jobLink} onChange={(e) => setJobLink(e.target.value)} />
                 </div>
@@ -171,9 +177,10 @@ const ApplicationsList = ({ applicationList, handleCardClick, selectedApplicatio
             let companyName = document.querySelector("#companyName").value
             let location = document.querySelector("#location").value
             let date = document.querySelector("#date").value
+            let interviewdate = document.querySelector("#interviewdate").value
             let status = document.querySelector("#status").value
             let jobLink = document.querySelector("#jobLink").value
-            handleUpdateDetails(selectedApplication?.id, jobTitle, companyName, location, date, status, jobLink);
+            handleUpdateDetails(selectedApplication?.id, jobTitle, companyName, location, date,interviewdate, status, jobLink);
             setCloseModal(true);
           }
           }>
@@ -216,23 +223,29 @@ const ApplicationPage = () => {
   };
 
   const handleUpdateDetails = useCallback(
-    (id, job, company, location, date, status, jobLink) => {
+    (id, job, company, location, date,interviewdate, status, jobLink) => {
       let application = {
         id: id ? id : null,
         jobTitle: job,
         companyName: company,
         location: location,
         date: date,
+        interviewdate:interviewdate,
         status: status,
         jobLink: jobLink
       }
 
+      console.log(application)
+
       if (application.id === null) {
+        console.log("Cool")
         fetch('http://127.0.0.1:5001/applications', {
           headers: {
+            userid: localStorage.getItem('userId'),
             Authorization: 'Bearer ' + localStorage.getItem('token'),
             'Access-Control-Allow-Origin': 'http://127.0.0.1:3000',
             'Access-Control-Allow-Credentials': 'true',
+            'Content-Type': 'application/json'
           },
           method: 'POST',
           body: JSON.stringify({
@@ -240,7 +253,6 @@ const ApplicationPage = () => {
               ...application,
             },
           }),
-          contentType: 'application/json',
         })
           .then((response) => response.json())
           .then((data) => {
@@ -256,11 +268,12 @@ const ApplicationPage = () => {
       } else {
         fetch('http://127.0.0.1:5001/applications/' + application.id, {
           headers: {
+            userid: localStorage.getItem('userId'),
             Authorization: 'Bearer ' + localStorage.getItem('token'),
             'Access-Control-Allow-Origin': 'http://127.0.0.1:3000',
             'Access-Control-Allow-Credentials': 'true',
           },
-          method: 'PUT',
+          method: 'POST',
           body: JSON.stringify({
             application: application,
           }),

@@ -3,6 +3,10 @@ const express = require('express');
 const Users = require('../models/User');  
 const app = express.Router();
 const getUserIdFromHeader = require('../helpers/get_userid');
+const { v4: uuidv4 } = require('uuid');
+const addToGoogleCalendar = require('./googlecalender')
+
+app.use(express.json())
 
 app.get("/", async (req, res) => {
   try {
@@ -19,8 +23,11 @@ app.get("/", async (req, res) => {
 
 app.post("/", async (req, res) => {
   try {
+    console.log('Got back application')
       const userId = getUserIdFromHeader(req);
       const { application } = req.body;
+      console.log("This is the application",application)
+
 
       if (!application.jobTitle || !application.companyName) {
           return res.status(400).json({ error: "Missing fields in input" });
@@ -28,16 +35,18 @@ app.post("/", async (req, res) => {
 
       const user = await Users.findById(userId);
       const currentApplication = {
-          id: getNewApplicationId(userId), // Implement this function to get new application ID
+          id:uuidv4(),
           jobTitle: application.jobTitle,
           companyName: application.companyName,
           date: application.date,
+          interviewdate:application.interviewdate,
           jobLink: application.jobLink,
           location: application.location,
           status: application.status || "1",
       };
 
       user.applications.push(currentApplication);
+      console.log(user.applications);
       await user.save();
       return res.status(200).json(currentApplication);
   } catch (error) {
