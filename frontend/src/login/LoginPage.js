@@ -88,6 +88,7 @@ export default class LoginPage extends Component {
 										className='form-control'
 										id='uname'
 										placeholder='Enter username'
+										data-testid="login-username"
 									/>
 								</div>
 
@@ -98,6 +99,7 @@ export default class LoginPage extends Component {
 										className='form-control'
 										id='pwd'
 										placeholder='Enter password'
+										data-testid="login-password"
 									/>
 								</div>
 								<div className='d-flex justify-content-center'>
@@ -110,6 +112,7 @@ export default class LoginPage extends Component {
 											this.handleLogin(uname, pwd);
 										}}
 										className='custom-btn px-3 py-2 mx-2'
+										data-testid="login-submit"
 										// style={{ marginRight: 10 }}
 									>
 										Login
@@ -135,6 +138,7 @@ export default class LoginPage extends Component {
 										className='form-control'
 										id='fullname'
 										placeholder='Full name'
+										data-testid="signup-fullname"
 									/>
 								</div>
 								<div className='form-group my-4'>
@@ -144,6 +148,7 @@ export default class LoginPage extends Component {
 										className='form-control'
 										id='suname'
 										placeholder='Enter username'
+										data-testid="signup-username"
 									/>
 								</div>
 								<div className='form-group my-4'>
@@ -153,6 +158,7 @@ export default class LoginPage extends Component {
 										className='form-control'
 										id='spwd'
 										placeholder='Enter password'
+										data-testid="signup-password"
 									/>
 								</div>
 								<div className='d-flex justify-content-center'>
