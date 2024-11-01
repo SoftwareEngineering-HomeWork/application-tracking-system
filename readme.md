@@ -8,11 +8,14 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/SoftwareEngineering-HomeWork/application-tracking-system)
 [![Static Badge][prettier-badge]][prettier-url]
 [![Static Badge][test-badge]][test-url]
+[![Static Badge][lint-badge]][lint-url]
 
 [prettier-badge]:https://img.shields.io/badge/code--formatter-Prettier-blue
 [prettier-url]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/blob/dev/new_backend/package.json#L23
 [test-badge]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/actions/workflows/test.yml/badge.svg
 [test-url]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/actions/workflows/test.yml
+[lint-badge]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/actions/workflows/lint.yml/badge.svg
+[lint-url]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/actions/workflows/lint.yml
 
 
 
