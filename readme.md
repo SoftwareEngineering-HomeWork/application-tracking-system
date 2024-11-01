@@ -9,8 +9,8 @@
 ![Code Formatter](https://img.shields.io/badge/code--formatter-Prettier-blue)
 [![Static Badge][test-badge]][test-url]
 
-[test-badge]:https://github.com/SoftwareEngineering-HomeWork/HW2/actions/workflows/test.yml/badge.svg
-[test-url]:https://github.com/SoftwareEngineering-HomeWork/HW2/actions/workflows/test.yml
+[test-badge]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/actions/workflows/test.yml/badge.svg
+[test-url]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/actions/workflows/test.yml
 
 
 
