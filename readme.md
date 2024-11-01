@@ -6,9 +6,11 @@
 [![GitHub issues](https://img.shields.io/github/issues/SoftwareEngineering-HomeWork/application-tracking-system)](https://github.com/jashgopani/application-tracking-system/issues)
 [![Github closes issues](https://img.shields.io/github/issues-closed-raw/SoftwareEngineering-HomeWork/application-tracking-system)](https://github.com/jashgopani/application-tracking-system/issues?q=is%3Aissue+is%3Aclosed)
 ![GitHub top language](https://img.shields.io/github/languages/top/SoftwareEngineering-HomeWork/application-tracking-system)
-![Code Formatter](https://img.shields.io/badge/code--formatter-Prettier-blue)
+[![Static Badge][prettier-badge]][prettier-url]
 [![Static Badge][test-badge]][test-url]
 
+[prettier-badge]:https://img.shields.io/badge/code--formatter-Prettier-blue
+[prettier-url]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/blob/dev/new_backend/package.json#L23
 [test-badge]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/actions/workflows/test.yml/badge.svg
 [test-url]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/actions/workflows/test.yml
 
