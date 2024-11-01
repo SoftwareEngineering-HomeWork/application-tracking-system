@@ -26,3 +26,4 @@ jobs:
 
       - name: Run tests in new_backend
         run: npm test -- new_backend
+        working-directory: new_backend
