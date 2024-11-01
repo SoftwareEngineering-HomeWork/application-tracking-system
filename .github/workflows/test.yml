@@ -23,7 +23,8 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: new_backend
 
       - name: Run tests in new_backend
-        run: npm test -- new_backend
+        run: npm test
         working-directory: new_backend
