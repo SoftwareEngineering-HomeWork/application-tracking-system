@@ -1,0 +1,97 @@
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  h3 {
+    margin-bottom: 10px;
+  }
+  
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .tag {
+    background-color: #DCE6F3;
+    color: #0D527A;
+    padding: 5px 10px;
+    border-radius: 20px;
+  }
+  
+  .skills-card h3 {
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .skills-tag {
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .skills-tag:hover {
+    background-color: #d0d0d0;
+  } 
+  
+  .locations-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .locations-tag {
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .locations-tag:hover {
+    background-color: #d0d0d0;
+  }
+
+  .form {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .input {
+    flex-grow: 1;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }
