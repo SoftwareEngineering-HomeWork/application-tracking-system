@@ -14,9 +14,7 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   node-version: ${{ matrix.node-version }}
-            - name: Install dependencies
-              run: |
-                  npm install
             - name: Analysing the code with ESLint
               run: |
-                  npx eslint new_backend/index.js
+                  cd new_backend
+                  npx eslint index.js
