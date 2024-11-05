@@ -5,10 +5,10 @@
   }
   
   .profile-pic {
-    width: 100px;          /* Adjust the width of the image */
-    height: 100px;         /* Adjust the height to make it a square */
-    object-fit: cover;     /* Ensure the image scales and fits within the box */
-    border-radius: 50%;    /* This makes the image circular */
-    border: 2px solid #0D527A;  /* Optional: Add a border for styling */
+    width: 100px;          
+    height: 100px;         
+    object-fit: cover;     
+    border-radius: 50%;    
+    border: 2px solid #0D527A;  
   }
   
