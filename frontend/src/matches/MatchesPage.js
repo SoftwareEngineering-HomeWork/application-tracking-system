@@ -23,7 +23,7 @@ const Recommendations = () => {
 	const fetchRecommendations = async () => {
 		try {
 			setIsFetchingJobs(true);
-			const response = await fetch('http://localhost:5000/getRecommendations', {
+			const response = await fetch('http://localhost:5002/swe-lists', {
 				headers: {
 					Authorization: 'Bearer ' + localStorage.getItem('token'),
 					'Access-Control-Allow-Origin': 'http://localhost:3000',

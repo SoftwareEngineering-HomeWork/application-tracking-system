@@ -12,17 +12,28 @@ let skillsData = [
 
 const fetchSkills = async () => {
   // Simulating API call
-  await new Promise(resolve => setTimeout(resolve, 500));
-  return skillsData;
+  const response = await fetch('http://localhost:5001/recruiter/skills');
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return await response.json();
 };
 
 const addSkill = async (newSkill) => {
-  // Simulating API call
-  await new Promise(resolve => setTimeout(resolve, 500));
-  const newId = skillsData.length + 1;
-  const skillToAdd = { id: newId, name: newSkill };
-  skillsData.push(skillToAdd);
-  return skillToAdd;
+
+  const response = await fetch('http://localhost:5001/recruiter/skills', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({newSkill})
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to add skill');
+  }
+
+  return newSkill;
 };
 
 function Skills() {
@@ -47,7 +58,7 @@ function Skills() {
       <h3>Skills Required</h3>
       <div className="tags">
         {skills.map((skill) => (
-            <div key={skill.id} className="tag">{skill.name}</div>
+            <div key={skill} className="tag">{skill}</div>
         ))}
       </div>
       <form onSubmit={handleAddSkill} className="form">

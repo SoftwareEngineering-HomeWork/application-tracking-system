@@ -9,10 +9,10 @@ const recruiterSchema = new mongoose.Schema({
   locations: [{ type: mongoose.Schema.Types.Mixed }],
 });
 
-const Recruiter = mongoose.model("Recruiter", recruiterSchema);
+
 
 // Method to convert user data to JSON
-userSchema.methods.toJSON = function () {
+recruiterSchema.methods.toJSON = function () {
   const user = this;
   const userObject = user.toObject();
 
@@ -27,19 +27,34 @@ recruiterSchema.methods.findMatchingUsers = async function () {
   const recruiter = this;
   const { skills, job_levels, locations } = recruiter;
 
+  // Log the recruiter's criteria
+  console.log("Recruiter Skills:", skills);
+  console.log("Recruiter Job Levels:", job_levels);
+  console.log("Recruiter Locations:", locations);
+
   const matchingUsers = await User.find({
     $expr: {
       $and: [
-        { $gte: [{ $size: { $setIntersection: [skills, "$skills"] } }, 2] },
-        { $eq: [job_levels[0], "$job_levels"] },
         {
-          $gte: [{ $size: { $setIntersection: [locations, "$locations"] } }, 1],
+          $in: [job_levels[0], { $map: { input: "$job_levels", as: "jl", in: "$$jl.label" } }],
         },
+        // {
+        //   $gte: [{ $size: { $setIntersection: [skills, { $map: { input: "$skills", as: "s", in: "$$s.label" } }] } }, 2],
+        // },
+        // {
+        //   $gte: [{ $size: { $setIntersection: [locations, { $map: { input: "$locations", as: "l", in: "$$l.label" } }] } }, 1],
+        // },
       ],
     },
   });
 
+  // Log the matching users found
+  console.log("Matching Users:", matchingUsers);
+
   return matchingUsers;
 };
 
+const Recruiter = mongoose.model("Recruiter", recruiterSchema);
+
+// Exporting the Recruiter model
 module.exports = Recruiter;

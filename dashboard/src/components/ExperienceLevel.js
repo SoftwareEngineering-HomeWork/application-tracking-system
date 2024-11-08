@@ -8,16 +8,27 @@ let experienceLevelsData = [
 ];
 
 const fetchExperienceLevels = async () => {
-  await new Promise(resolve => setTimeout(resolve, 500));
-  return experienceLevelsData;
+  const response = await fetch('http://localhost:5001/recruiter/experience');
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return await response.json();
 };
 
 const addExperienceLevel = async (newLevel) => {
-  await new Promise(resolve => setTimeout(resolve, 500));
-  const newId = experienceLevelsData.length + 1;
-  const levelToAdd = { id: newId, name: newLevel };
-  experienceLevelsData.push(levelToAdd);
-  return levelToAdd;
+  const response = await fetch('http://localhost:5001/recruiter/experience', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({newLevel})
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to add skill');
+  }
+
+  return newLevel;
 };
 
 function ExperienceLevel() {
@@ -42,7 +53,7 @@ function ExperienceLevel() {
       <h3>Experience Level</h3>
       <div className="tags">
         {levels.map((level) => (
-          <div key={level.id} className="tag">{level.name}</div>
+          <div key={level} className="tag">{level}</div>
         ))}
       </div>
       <form onSubmit={handleAddLevel} className="form">

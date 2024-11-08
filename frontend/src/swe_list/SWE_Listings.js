@@ -9,7 +9,7 @@ const SWEListings = () => {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await axios.get('http://192.168.1.145:5002/swe-lists', {
+        const response = await axios.get('http://localhost:5002/swe-lists', {
           headers: {
             'Access-Control-Allow-Origin': '*', // Allow all origins
           },

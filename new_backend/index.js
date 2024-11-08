@@ -5,6 +5,10 @@ const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
 const profileRouter = require("./routes/profile");
 const applicationRouter = require("./routes/applications");
+const locationRouter=require('./routes/locations');
+const skillRouter=require('./routes/skills');
+const experienceRouter=require('./routes/experience');
+const matchingRouter=require('./routes/recruitermatching');
 const authmiddleware = require("./middlewares/authorization");
 const app = express();
 const port = 5001;
@@ -26,6 +30,10 @@ app.use("/users/signup", signupRouter);
 app.use("/users/login", loginRouter);
 app.use("/profile", profileRouter);
 app.use("/applications", applicationRouter);
+app.use("/recruiter/locations", locationRouter);
+app.use("/recruiter/skills", skillRouter);
+app.use("/recruiter/experience", experienceRouter);
+app.use('/recruiter/matches',matchingRouter)
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Application Tracking Systems API");
