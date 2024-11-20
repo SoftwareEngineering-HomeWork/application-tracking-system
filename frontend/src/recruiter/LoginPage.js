@@ -34,7 +34,7 @@ const LoginPage = (props) => {
 				storeToken({ ...res, userId: res.profile.id });
 			})
 			.then((res) => {
-				alert('Log In successfull! Refresh to proceed');
+				window.location.assign('http://localhost:3000/recruiter')
 			})
 			.catch((error) => {
 				console.log(error);
