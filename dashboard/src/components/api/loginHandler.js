@@ -39,5 +39,5 @@ export const recruitersignUp = (params) => {
 
 export const storeToken = (obj) => {
   localStorage.setItem("token", obj.token);
-  localStorage.setItem("userId", obj.userId);
+  localStorage.setItem("userId", obj.profile.userId);
 };

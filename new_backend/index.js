@@ -26,6 +26,8 @@ app.use(cors());
 //     authmiddleware(req, res, next); // Apply middleware for other routes
 // });
 
+app.use("/recruiter/signup", signupRouter);
+app.use("/recruiter/login", loginRouter);
 app.use("/users/signup", signupRouter);
 app.use("/users/login", loginRouter);
 app.use("/profile", profileRouter);
