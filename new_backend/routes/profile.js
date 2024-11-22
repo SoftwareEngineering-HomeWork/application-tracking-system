@@ -6,6 +6,7 @@ const getUserIdFromHeader = require("../helpers/get_userid");
 //Path to get back profile details
 router.get("/", async (req, res) => {
   try {
+    console.log("req: ", req)
     const userid = getUserIdFromHeader(req);
     let user = await Users.findById(userid);
     if (!user) {
@@ -38,6 +39,7 @@ router.get("/", async (req, res) => {
 //Path to update profile details
 router.post("/", async (req, res) => {
   try {
+    console.log("req: ", req)
     const userid = getUserIdFromHeader(req);
     console.log("This is the userId", userid);
     const user = await Users.findById(userid);
@@ -60,6 +62,7 @@ router.post("/", async (req, res) => {
     await user.save();
     return res.status(200).json(user);
   } catch (error) {
+    console.log("error: ", error)
     return res
       .status(500)
       .json({ error: "Internal server error, cannot update profile data" });

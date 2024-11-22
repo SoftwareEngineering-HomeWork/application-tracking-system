@@ -15,7 +15,7 @@ function LoginPage() {
       const response = await getrecruiterToken({ username, password }); // Call login API
 	  console.log("response", response)
       storeToken(response); // Store token and user data in localStorage
-      window.location.href = '/dashboard'; // Redirect to dashboard or home
+      window.location.href = '/main'; // Redirect to dashboard or home
     } catch (error) {
       setErrorMessage('Invalid login credentials. Please try again.');
     }

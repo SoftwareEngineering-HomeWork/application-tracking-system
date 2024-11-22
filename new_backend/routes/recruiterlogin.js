@@ -6,34 +6,31 @@ const { v4: uuidv4 } = require("uuid");
 
 router.post("/", async (req, res) => {
   try {
-    const { companyname, password } = req.body;
+    const { username, password,} = req.body;
 
-    if (!companyname || !password) {
-      return res.status(400).json({ error: "Companyname or password missing" });
+    if (!username || !password) {
+      return res.status(400).json({ error: "username or password missing" });
     }
 
-    const recruiter = await Recruiters.findOne({ companyname });
+    const recruiter = await Recruiters.findOne({ username });
     if (!recruiter) {
-      return res.status(400).json({ error: "Wrong companyname or password" });
+      return res.status(400).json({ error: "Wrong username or password" });
     }
 
     // Compare the hashed password
     const isMatch = await bcrypt.compare(password, recruiter.password);
     if (!isMatch) {
-      return res.status(400).json({ error: "Wrong companyname or password" });
+      return res.status(400).json({ error: "Wrong password" });
     }
-
-    const token = `${user._id}.${uuidv4()}`;
-
+    const token = `${recruiter._id}.${uuidv4()}`;
     // Prepare profile information
     const profileInfo = {
       id: recruiter._id,
-      companyname: recruiter.companynameName,
-      skills: recruiter.skills,
-      locations: recruiter.locations,
-      jobLevels: recruiter.job_levels,
+      username: recruiter.username,
+      fullName: recruiter.fullName,
+      email: recruiter.email,
+      job_ids: recruiter.job_ids,
     };
-
     return res.json({ profile: profileInfo, token });
   } catch (error) {
     console.error("Login error:", error);

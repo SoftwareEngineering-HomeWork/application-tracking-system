@@ -2,11 +2,15 @@ const mongoose = require("mongoose");
 const User = require("./User");
 
 const recruiterSchema = new mongoose.Schema({
-  companyname: { type: String, required: true, unique: true },
+  username: { type: String, required: true, unique: true },
+  fullName: { type: String, required: true },
   password: { type: String, required: true },
-  skills: [{ type: mongoose.Schema.Types.Mixed }],
-  job_levels: [{ type: mongoose.Schema.Types.Mixed }],
-  locations: [{ type: mongoose.Schema.Types.Mixed }],
+  authTokens: [{ type: mongoose.Schema.Types.Mixed }],
+  email: { type: String, required: false },
+  companyName: { type: String, required: false },
+  location:  {type: String, required: false },
+  contact: { type: String, required: false },
+  job_ids: { type: Array, required: false},
 });
 
 
@@ -18,19 +22,15 @@ recruiterSchema.methods.toJSON = function () {
 
   return {
     id: userObject._id,
-    companyname: userObject.username,
+    username: userObject.username,
+    fullName: userObject.fullName
   };
 };
 
 // Method to find matching users based on recruiter's criteria
 recruiterSchema.methods.findMatchingUsers = async function () {
   const recruiter = this;
-  const { skills, job_levels, locations } = recruiter;
-
-  // Log the recruiter's criteria
-  console.log("Recruiter Skills:", skills);
-  console.log("Recruiter Job Levels:", job_levels);
-  console.log("Recruiter Locations:", locations);
+  const { job_id } = recruiter;
 
   const matchingUsers = await User.find({
     $expr: {

@@ -6,8 +6,10 @@ const getUserIdFromHeader = require("../helpers/get_userid");
 //Path to get back profile details
 router.get("/", async (req, res) => {
   try {
-    const userid = getUserIdFromHeader(req);
-    let user = await Recruiters.findById(userid);
+    // console.log(req.headers)
+    const username = getUserIdFromHeader(req);
+    let user = await Recruiters.findOne({username});
+    console.log("user", user)
     if (!user) {
       return res
         .status(500)
@@ -15,13 +17,18 @@ router.get("/", async (req, res) => {
     }
 
     const profileInformation = {
-      skills: user.skills,
-      job_levels: user.job_levels,
-      locations: user.locations,
+      username: user.username,
+      fullName: user.fullName,
+      email: user.email,
+      companyName: user.companyName,
+      contact: user.contact,
+      location: user.location,
+      job_ids: user.job_ids,
     };
 
     return res.status(200).json(profileInformation);
   } catch (error) {
+    console.log("error", error)
     return res
       .status(500)
       .json({ error: "Internal server error, cannot get profile data" });
@@ -33,14 +40,14 @@ router.post("/", async (req, res) => {
   try {
     const userid = getUserIdFromHeader(req);
     console.log("This is the userId", userid);
-    const user = await Recruiters.findById(userid);
+    const user = await Recruiters.findOne({ username: userid });
 
     if (!user) {
       return res.status(404).json({ error: "Recruiter not found" });
     }
 
     const data = req.body;
-
+    console.log("data: ", data)
     // Update other user fields
     Object.keys(data).forEach((key) => {
       user.set(key, data[key]);
@@ -49,6 +56,7 @@ router.post("/", async (req, res) => {
     await user.save();
     return res.status(200).json(user);
   } catch (error) {
+    console.log("error: ", error)
     return res
       .status(500)
       .json({ error: "Internal server error, cannot update profile data" });
