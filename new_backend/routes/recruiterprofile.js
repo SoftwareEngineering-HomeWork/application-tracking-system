@@ -23,7 +23,6 @@ router.get("/", async (req, res) => {
       companyName: user.companyName,
       contact: user.contact,
       location: user.location,
-      job_ids: user.job_ids,
     };
 
     return res.status(200).json(profileInformation);

@@ -2,6 +2,7 @@
   /* display: flex; */
   padding-top: 50px;
   height: 90vh; 
+  position: fixed; 
   padding-bottom: 100px;
   margin-bottom: 200px;
   font-family: 'Arial', sans-serif;
@@ -13,6 +14,7 @@
   padding: 30px;
   padding-top: 100px;
   padding-right: 100px;
+  position: fixed; 
   flex-grow: 1;
   margin-left: 200px; /* Adjust according to Sidebar width */
   gap: 20px;

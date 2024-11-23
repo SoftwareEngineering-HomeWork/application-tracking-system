@@ -10,7 +10,6 @@ const recruiterSchema = new mongoose.Schema({
   companyName: { type: String, required: false },
   location:  {type: String, required: false },
   contact: { type: String, required: false },
-  job_ids: { type: Array, required: false},
 });
 
 
@@ -30,7 +29,6 @@ recruiterSchema.methods.toJSON = function () {
 // Method to find matching users based on recruiter's criteria
 recruiterSchema.methods.findMatchingUsers = async function () {
   const recruiter = this;
-  const { job_id } = recruiter;
 
   const matchingUsers = await User.find({
     $expr: {

@@ -7,7 +7,8 @@ const PROFILE = {
 	PREFERRED_LOCATIONS: 'locations',
 	SKILLS: 'skills',
 	EXPERIENCE_LEVEL: 'job_levels',
-	COMPANY_NAME: 'companyName'
+	COMPANY_NAME: 'companyName',
+	USERNAME: 'username'
 	// JOB_MODE: "modes",
 };
 

@@ -29,7 +29,6 @@ router.post("/", async (req, res) => {
       username: recruiter.username,
       fullName: recruiter.fullName,
       email: recruiter.email,
-      job_ids: recruiter.job_ids,
     };
     return res.json({ profile: profileInfo, token });
   } catch (error) {

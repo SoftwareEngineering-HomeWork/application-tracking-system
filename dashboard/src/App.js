@@ -3,14 +3,11 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import './App.css';
 import Sidebar from './components/Sidebar';
 import ProfilePage from './components/profile/ProfilePage';
-import Skills from './components/Skills';
-import ExperienceLevel from './components/ExperienceLevel';
-import Locations from './components/Locations';
-import axios from 'axios';
-import Header from './components/Header';
-import Footer from './components/Footer';
 import MatchesPage from './components/MatchesPage';
 import LoginPage from './components/LoginPage';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import axios from 'axios';
 
 function MainContent({ setIsLoggedIn }) {
   const [userProfile, setUserProfile] = useState(null);
@@ -21,15 +18,15 @@ function MainContent({ setIsLoggedIn }) {
 
     if (token && userId) {
       axios
-				.get('http://localhost:5001/recruiterprofile', {
-					headers: {
-						userid: userId,
-						Authorization: `Bearer ${token}`
-					}
-				})
-				.then((res) => {
-          setUserProfile(res.data);
+        .get('http://localhost:5001/recruiterprofile', {
+          headers: {
+            userid: userId,
+            Authorization: `Bearer ${token}`,
+          },
         })
+        .then((res) => {
+          setUserProfile(res.data);
+        });
     }
 
     const checkLoginStatus = () => {
@@ -44,7 +41,7 @@ function MainContent({ setIsLoggedIn }) {
   }, [setIsLoggedIn]);
 
   if (!userProfile) {
-    return <div>Loading...</div>; // A fallback while loading the profile
+    return <div>Loading...</div>;
   }
 
   return (
@@ -52,12 +49,7 @@ function MainContent({ setIsLoggedIn }) {
       <div className="top-left">
         <ProfilePage profile={userProfile} />
       </div>
-      <div className="bottom-right">
-        {/* <Skills />
-        <ExperienceLevel />
-        <Locations /> */}
-      </div>
-     </div>
+    </div>
   );
 }
 

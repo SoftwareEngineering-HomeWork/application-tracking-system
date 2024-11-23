@@ -12,6 +12,7 @@ import {
 	faPenToSquare,
 	faPhone
 } from '@fortawesome/free-solid-svg-icons';
+import {PostJobCard, JobListCard}from '../job/PostJobCard';
 
 const ProfilePage = (props) => {
 	const [locationModalOpen, setLocationModalOpen] = useState(false);
@@ -117,150 +118,8 @@ const ProfilePage = (props) => {
 					</div>
 				</div>
 				<div className='col-8'>
-					{/* <div
-						className='card my-3 p-2'
-						style={{
-							boxShadow: '0px 5px 12px 0px rgba(0,0,0,0.1)'
-						}}
-					>
-						<div className='card-body'>
-							<div className='d-flex justify-content-between px-0 mb-3'>
-								<h4 className='card-title mb-0 mx-1'>Skills</h4>
-								<div className='text-right'>
-									<FontAwesomeIcon
-										icon={faPenToSquare}
-										size='1x'
-										onClick={() => setSkillsModalOpen(true)}
-										cursor='pointer'
-									/>
-								</div>
-							</div>
-							<div className='d-flex flex-wrap'>
-								{profile[CONSTANTS.PROFILE.SKILLS]?.map((ele, index) => (
-									<span
-										className='badge rounded-pill m-1 py-2 px-3'
-										style={{
-											border: '2px solid',
-											// backgroundColor: "#0096c7",
-											backgroundColor: '#296e85',
-											fontSize: 16,
-											fontWeight: 'normal'
-										}}
-										key={index}
-									>
-										{ele.label}
-									</span>
-								))}
-							</div>
-						</div>
-					</div> */}
-					{/* <div
-						className='card my-3 p-2'
-						style={{
-							boxShadow: '0px 5px 12px 0px rgba(0,0,0,0.1)'
-						}}
-					>
-						<div className='card-body'>
-							<div className='d-flex justify-content-between px-0 mb-3'>
-								<h4 className='card-title mb-0 mx-1'>Experience Level</h4>
-								<FontAwesomeIcon
-									icon={faPenToSquare}
-									size='1x'
-									onClick={() => setExpLevelModalOpen(true)}
-									cursor='pointer'
-								/>
-							</div>
-							<div className='d-flex flex-wrap'>
-								{profile.job_levels?.map((ele, index) => (
-									<span
-										className='badge rounded-pill m-1 py-2 px-3'
-										style={{
-											border: '2px solid',
-											// backgroundColor: "#0096c7",
-											backgroundColor: '#296e85',
-											fontSize: 16,
-											fontWeight: 'normal'
-										}}
-										key={index}
-									>
-										{ele.label}
-									</span>
-								))}
-							</div>
-						</div>
-					</div> */}
-					{/* <div
-						className='card my-3 p-2'
-						style={{
-							boxShadow: '0px 5px 12px 0px rgba(0,0,0,0.1)'
-						}}
-					>
-						<div className='card-body'>
-							<div className='d-flex justify-content-between px-0 mb-3'>
-								<h4 className='card-title mb-0 mx-1'>Locations</h4>
-								<FontAwesomeIcon
-									icon={faPenToSquare}
-									size='1x'
-									onClick={() => setLocationModalOpen(true)}
-									cursor='pointer'
-								/>
-							</div>
-							<div className='d-flex flex-wrap'>
-								{profile[CONSTANTS.PROFILE.PREFERRED_LOCATIONS]?.map(
-									(ele, index) => (
-										<span
-											className='badge rounded-pill m-1 py-2 px-3'
-											style={{
-												border: '2px solid',
-												// backgroundColor: "#0096c7",
-												backgroundColor: '#296e85',
-												fontSize: 16,
-												fontWeight: 'normal'
-											}}
-											key={index}
-										>
-											{ele.label}
-										</span>
-									)
-								)}
-							</div>
-						</div>
-					</div> */}
-					{/* <div
-            className="card my-3 p-2"
-            style={{
-              boxShadow: "0px 5px 12px 0px rgba(0,0,0,0.1)",
-            }}
-          >
-            <div className="card-body">
-              <div className="d-flex justify-content-between px-0 mb-3">
-                <h4 className="card-title mb-0 mx-1">Mode of job</h4>
-                <FontAwesomeIcon
-                  icon={faPenToSquare}
-                  size="1x"
-                  onClick={() => setJobModeModalOpen(true)}
-                  cursor="pointer"
-                />
-              </div>
-              <div className="d-flex flex-wrap">
-                {profile.modes.map((ele, index) => (
-                  <span
-                    className="badge rounded-pill m-1 py-2 px-3"
-                    style={{
-                      border: "2px solid",
-                      // backgroundColor: "#0096c7",
-                      backgroundColor: "#296e85",
-                      fontSize: 16,
-                      fontWeight: "normal",
-                    }}
-                    key={index}
-                  >
-                    {ele.label}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div> */}
+				<PostJobCard recruiterId={profile[CONSTANTS.PROFILE.USERNAME]}/>
+				<JobListCard recruiterId={profile[CONSTANTS.PROFILE.USERNAME]}/>
 				</div>
 			</div>
 			{locationModalOpen && (
