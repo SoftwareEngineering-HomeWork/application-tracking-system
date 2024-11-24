@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import { Modal, ModalBody, ModalDialog, ModalFooter } from 'react-bootstrap';
+import { Modal, ModalBody, ModalFooter } from 'react-bootstrap';
 import ModalHeader from 'react-bootstrap/ModalHeader';
 import axios from 'axios';
 

@@ -10,7 +10,7 @@ const CustomProfileModal = (props) => {
 	const [error, setError] = useState(false);
 
 	const handleSave = () => {
-		if (data[CONSTANTS.PROFILE.NAME] == '') {
+		if (data[CONSTANTS.PROFILE.NAME] === '') {
 			setError(true);
 		} else {
 			axios

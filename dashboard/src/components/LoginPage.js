@@ -25,7 +25,7 @@ function LoginPage() {
     setErrorMessage('');
     setSuccessMessage('');
     try {
-      const response = await recruitersignUp({ fullName: name, username, password }); // Call signup API
+      await recruitersignUp({ fullName: name, username, password }); // Call signup API
       setSuccessMessage('Signup successful! You can now log in.');
     } catch (error) {
       setErrorMessage('Signup failed. Please try again.');

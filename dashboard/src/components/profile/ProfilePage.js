@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import LocationModal from './CustomModal';
-import SkillsModal from './CustomModal';
-import ExperienceLevelModal from './CustomModal';
-import JobModeModal from './CustomModal';
+import React, { useState } from 'react';
 import ProfileModal from './CustomProfileModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { CONSTANTS } from '../data/Constants';
@@ -15,11 +11,7 @@ import {
 import {PostJobCard, JobListCard}from '../job/PostJobCard';
 
 const ProfilePage = (props) => {
-	const [locationModalOpen, setLocationModalOpen] = useState(false);
-	const [skillsModalOpen, setSkillsModalOpen] = useState(false);
-	const [ExpLevelModalOpen, setExpLevelModalOpen] = useState(false);
 	const [profileModalOpen, setProfileModalOpen] = useState(false);
-	const [jobModeModalOpen, setJobModeModalOpen] = useState(false);
 
 	const profile = props.profile;
 	console.log("This is the profile",profile);
@@ -122,46 +114,6 @@ const ProfilePage = (props) => {
 				<JobListCard recruiterId={profile[CONSTANTS.PROFILE.USERNAME]}/>
 				</div>
 			</div>
-			{locationModalOpen && (
-				<LocationModal
-					name={CONSTANTS.PROFILE.PREFERRED_LOCATIONS}
-					options={CONSTANTS.COUNTRIES}
-					profile={props.profile}
-					// setProfile={setProfile}
-					setModalOpen={setLocationModalOpen}
-					updateProfile={props.updateProfile}
-				/>
-			)}
-			{skillsModalOpen && (
-				<SkillsModal
-					name={CONSTANTS.PROFILE.SKILLS}
-					options={CONSTANTS.SKILLS}
-					profile={props.profile}
-					// setProfile={setProfile}
-					setModalOpen={setSkillsModalOpen}
-					updateProfile={props.updateProfile}
-				/>
-			)}
-			{ExpLevelModalOpen && (
-				<ExperienceLevelModal
-					name={CONSTANTS.PROFILE.EXPERIENCE_LEVEL}
-					options={CONSTANTS.EXPERIENCE_LEVEL}
-					profile={props.profile}
-					// setProfile={setProfile}
-					setModalOpen={setExpLevelModalOpen}
-					updateProfile={props.updateProfile}
-				/>
-			)}
-			{jobModeModalOpen && (
-				<JobModeModal
-					name={CONSTANTS.PROFILE.JOB_MODE}
-					options={CONSTANTS.JOB_MODES}
-					profile={props.profile}
-					// setProfile={setProfile}
-					setModalOpen={setJobModeModalOpen}
-					updateProfile={props.updateProfile}
-				/>
-			)}
 			{profileModalOpen && (
 				<ProfileModal
 					profile={props.profile}
