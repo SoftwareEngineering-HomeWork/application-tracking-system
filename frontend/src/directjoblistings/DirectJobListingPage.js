@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Spinner, Modal } from 'react-bootstrap';
+import { Table, Button, Spinner, Modal, Alert } from 'react-bootstrap';
 
 const DirectJobListingPage = () => {
   const [jobs, setJobs] = useState([]);
+  const [appliedJobs, setAppliedJobs] = useState([]); // To store job IDs that the user has applied for
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedJob, setSelectedJob] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     fetchJobs();
+    fetchUserApplications();
   }, []);
 
+  // Fetch all jobs
   const fetchJobs = async () => {
     try {
       setIsLoading(true);
@@ -34,9 +38,60 @@ const DirectJobListingPage = () => {
     }
   };
 
+  // Fetch the jobs that the current user has applied for
+  const fetchUserApplications = async () => {
+    try {
+      const response = await fetch('http://localhost:5001/applications/apply', {
+        method: 'GET',
+        headers: {
+          userid: localStorage.getItem('userId'),
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        setAppliedJobs(data); // Store applied job IDs
+      } else {
+        throw new Error(data.error || 'Failed to fetch user applications');
+      }
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  // Handle job application
+  const handleApply = async (jobId) => {
+    try {
+      const response = await fetch('http://localhost:5001/applications/apply', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          userid: localStorage.getItem('userId'),
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({ jobId }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        // setSuccessMessage(data.message);
+        setAppliedJobs((prev) => [...prev, jobId]); // Add the applied job to the list
+      } else {
+        throw new Error(data.error || 'Failed to apply for the job');
+      }
+    } catch (err) {
+      // setError(err.message);
+    }
+  };
+
+  // Check if the user has applied for the job
+  const isJobApplied = (jobId) => appliedJobs.includes(jobId);
+
   return (
     <div className="direct-job-listings-container">
       <h1>Direct Job Listings</h1>
+      {successMessage && <Alert variant="success">{successMessage}</Alert>}
       {isLoading && <Spinner animation="border" />}
       {error && <p className="text-danger">{error}</p>}
       {!isLoading && jobs.length === 0 && <p>No jobs found.</p>}
@@ -50,6 +105,7 @@ const DirectJobListingPage = () => {
               <th>Salary Range</th>
               <th>Skills Required</th>
               <th>Description</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -72,6 +128,20 @@ const DirectJobListingPage = () => {
                   <Button variant="info" onClick={() => setSelectedJob(job)}>
                     View Description
                   </Button>
+                </td>
+                <td>
+                  {isJobApplied(job.job_id) ? (
+                    <Button variant="success" disabled>
+                      Applied
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="primary"
+                      onClick={() => handleApply(job.job_id)}
+                    >
+                      Apply
+                    </Button>
+                  )}
                 </td>
               </tr>
             ))}

@@ -3,10 +3,10 @@ import { Modal, ModalBody, ModalFooter, Form } from 'react-bootstrap';
 import ModalHeader from 'react-bootstrap/ModalHeader';
 import axios from 'axios';
 
-// PostJobCard Component - For posting a new job
 const PostJobCard = ({ recruiterId, updateRecruiterData }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [jobData, setJobData] = useState({
+    job_id: '', // Add job_id field
     job_title: '',
     job_description: '',
     job_location: '',
@@ -22,13 +22,13 @@ const PostJobCard = ({ recruiterId, updateRecruiterData }) => {
   });
 
   const handleOpenModal = () => {
-    resetForm(); // Reset the form when opening the modal
+    resetForm(); // Reset form data
     setModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setModalOpen(false);
-    resetForm(); // Reset the form when closing the modal without saving
+    resetForm(); // Reset form on close
   };
 
   const handleFileChange = (e) => {
@@ -37,22 +37,19 @@ const PostJobCard = ({ recruiterId, updateRecruiterData }) => {
   };
 
   const handleSave = () => {
-    // Create the data object to send as JSON
     const jobDataToSend = {
-      recruiterId: recruiterId,  // Include the recruiterId
-      ...jobData,  // Spread the job data
+      recruiterId: recruiterId,
+      ...jobData,
     };
 
     axios
       .post('http://localhost:5001/recruiter/jobs', jobDataToSend, {
-        headers: {
-          'Content-Type': 'application/json',  // Set the content type as JSON
-        },
+        headers: { 'Content-Type': 'application/json' },
       })
       .then((res) => {
-        updateRecruiterData(res.data);  // Update recruiter data with response
-        setModalOpen(false);  // Close modal
-        resetForm();  // Reset the form after save
+        updateRecruiterData(res.data);
+        setModalOpen(false);
+        resetForm();
       })
       .catch((err) => {
         console.error('Error posting job:', err);
@@ -62,6 +59,7 @@ const PostJobCard = ({ recruiterId, updateRecruiterData }) => {
 
   const resetForm = () => {
     setJobData({
+      job_id: '',
       job_title: '',
       job_description: '',
       job_location: '',
@@ -97,15 +95,19 @@ const PostJobCard = ({ recruiterId, updateRecruiterData }) => {
       <Modal show={modalOpen} onHide={handleCloseModal} centered backdrop="static" size="lg">
         <ModalHeader>
           <h5 className="modal-title">Post a Job</h5>
-          <button
-            type="button"
-            className="btn-close"
-            aria-label="Close"
-            onClick={handleCloseModal}
-          ></button>
+          <button type="button" className="btn-close" onClick={handleCloseModal}></button>
         </ModalHeader>
         <ModalBody style={{ maxHeight: '400px', overflowY: 'auto' }}>
           <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Job ID</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter unique job ID"
+                value={jobData.job_id}
+                onChange={(e) => setJobData({ ...jobData, job_id: e.target.value })}
+              />
+            </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Job Title</Form.Label>
               <Form.Control
@@ -239,14 +241,14 @@ const JobListCard = ({ recruiterId }) => {
           recruiterId: recruiterId, // Use query param for recruiterId
         },
       });
-      setJobs(response.data);  // Set the jobs list from the response
+      setJobs(response.data); // Set the jobs list from the response
     } catch (err) {
       console.error('Error fetching jobs:', err);
     }
   };
 
   const handleOpenModal = () => {
-    fetchJobs();  // Fetch jobs when modal is opened
+    fetchJobs(); // Fetch jobs when modal is opened
     setModalOpen(true);
   };
 
@@ -292,6 +294,7 @@ const JobListCard = ({ recruiterId }) => {
                 style={{ cursor: 'pointer', border: '1px solid #ccc', padding: '10px' }}
               >
                 <h5>{job.job_title}</h5>
+                <p><strong>Job ID:</strong> {job.job_id}</p>
                 <p><strong>Location:</strong> {job.job_location}</p>
                 <p><strong>Job Type:</strong> {job.job_type}</p>
                 <p><strong>Experience Level:</strong> {job.experience_level}</p>

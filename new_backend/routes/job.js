@@ -5,29 +5,28 @@ const Job = require("../models/Job_Model");
 
 // POST request to create a job (no changes here)
 router.post('/', (req, res) => {
-    const { recruiterId, ...jobData } = req.body;  // Extract recruiterId and job data
-
-    // Check if recruiterId is provided
-    if (!recruiterId) {
-        return res.status(400).json({ error: 'recruiterId is required' });
+    const { recruiterId, job_id, ...jobData } = req.body;
+  
+    if (!recruiterId || !job_id) {
+      return res.status(400).json({ error: 'recruiterId and job_id are required' });
     }
-
-    // Create a new Job document
+  
     const newJob = new Job({
-        recruiter_id: recruiterId,  // Set recruiter_id as ObjectId
-        ...jobData,  // Spread other job data fields
+      recruiter_id: recruiterId,
+      job_id: job_id, // Include job_id
+      ...jobData,
     });
-
-    // Save the new job to the database
-    newJob.save()
+  
+    newJob
+      .save()
       .then((job) => {
-        res.status(200).json(job);  // Return the saved job in the response
+        res.status(200).json(job);
       })
       .catch((err) => {
-        console.log(err);  // Log any errors for debugging
+        console.error(err);
         res.status(500).json({ error: 'Failed to post job' });
       });
-});
+  });
 
 // GET request to fetch jobs
 router.get('/', (req, res) => {
