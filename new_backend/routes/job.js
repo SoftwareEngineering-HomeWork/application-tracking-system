@@ -29,22 +29,19 @@ router.post('/', (req, res) => {
       });
 });
 
-// GET request to fetch jobs posted by a recruiter
+// GET request to fetch jobs
 router.get('/', (req, res) => {
-    const { recruiterId } = req.query;  // Get recruiterId from query parameters
+    const { recruiterId } = req.query; // Get recruiterId from query parameters
 
-    // Check if recruiterId is provided
-    if (!recruiterId) {
-        return res.status(400).json({ error: 'recruiterId is required' });
-    }
+    const filter = recruiterId ? { recruiter_id: recruiterId } : {}; // Filter by recruiterId if provided
 
-    // Fetch jobs by recruiterId
-    Job.find({ recruiter_id: recruiterId })
+    // Fetch jobs based on the filter
+    Job.find(filter)
         .then((jobs) => {
             if (!jobs || jobs.length === 0) {
-                return res.status(404).json({ message: 'No jobs found for this recruiter' });
+                return res.status(404).json({ message: 'No jobs found' });
             }
-            res.status(200).json(jobs);  // Return the jobs in the response
+            res.status(200).json(jobs); // Return the jobs in the response
         })
         .catch((err) => {
             console.error(err);
