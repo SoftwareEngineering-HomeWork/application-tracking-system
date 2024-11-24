@@ -6,8 +6,9 @@ const applicationSchema = new mongoose.Schema({
   candidateInfo: {
     fullName: { type: String, required: true },
     email: { type: String, required: false },
-    skills: [{ type: String }],
+    skills: [{ type: mongoose.Schema.Types.Mixed }],
     resume: { type: String },
+    phone_number: { type: String },
   },
   appliedAt: { type: Date, default: Date.now },
 });

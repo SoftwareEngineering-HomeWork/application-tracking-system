@@ -6,7 +6,7 @@ const getUserIdFromHeader = require("../helpers/get_userid");
 //Path to get back profile details
 router.get("/", async (req, res) => {
   try {
-    console.log("req: ", req)
+    // console.log("req: ", req)
     const userid = getUserIdFromHeader(req);
     let user = await Users.findById(userid);
     if (!user) {
@@ -39,7 +39,7 @@ router.get("/", async (req, res) => {
 //Path to update profile details
 router.post("/", async (req, res) => {
   try {
-    console.log("req: ", req)
+    // console.log("req: ", req)
     const userid = getUserIdFromHeader(req);
     console.log("This is the userId", userid);
     const user = await Users.findById(userid);

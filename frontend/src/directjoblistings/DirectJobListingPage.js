@@ -56,7 +56,7 @@ const DirectJobListingPage = () => {
         throw new Error(data.error || 'Failed to fetch user applications');
       }
     } catch (err) {
-      setError(err.message);
+      // setError(err.message);
     }
   };
 

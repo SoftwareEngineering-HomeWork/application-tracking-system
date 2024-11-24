@@ -31,6 +31,7 @@ router.post('/', async (req, res) => {
         email: user.email,
         skills: user.skills,
         resume: user.resume,
+        phone_number: user.phone_number
       },
     });
 
@@ -46,17 +47,25 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const userId = getUserIdFromHeader(req); // Fetch user ID from the request header
-    if (!userId) {
-      return res.status(400).json({ error: 'User ID is required' });
+    const jobId = req.query.job_id;
+    // If userId is provided, get applications for that user
+    if (userId) {
+      const applications = await Applications.find({ userId }); // Find applications for the user
+      if (!applications || applications.length === 0) {
+        return res.status(404).json({ message: 'No applications found' });
+      }
+      // Send back the list of job IDs that the user has applied for
+      const appliedJobIds = applications.map(application => application.jobId);
+      return res.status(200).json(appliedJobIds);
+    } else {
+      // If no userId is provided, return all users based on job_id
+      const allJobs = await Applications.find(); // Assuming Jobs is the model for job listings
+      if (!allJobs || allJobs.length === 0) {
+        return res.status(404).json({ message: 'No jobs available' });
+      }
+      const filteredJobs = allJobs.filter(job => job.jobId === jobId);
+      return res.status(200).json(filteredJobs); // Return all available jobs
     }
-
-    const applications = await Applications.find({ userId }); // Assuming jobId references Job model
-    if (!applications || applications.length === 0) {
-      return res.status(404).json({ message: 'No applications found' });
-    }
-    // Send back the list of job IDs that the user has applied for
-    const appliedJobIds = applications.map(application => application.jobId);
-    return res.status(200).json(appliedJobIds);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Internal server error' });
