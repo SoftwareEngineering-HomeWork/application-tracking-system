@@ -71,9 +71,9 @@ function App() {
   return (
     <Router>
       <div>
-        <Header />
+      {isLoggedIn && <Header setIsLoggedIn={setIsLoggedIn}/>}
         <div className="app-container">
-          {isLoggedIn && <Sidebar setIsLoggedIn={setIsLoggedIn} />}
+          {/* {isLoggedIn && <Sidebar setIsLoggedIn={setIsLoggedIn} />} */}
           <Routes>
             <Route path="/" element={isLoggedIn ? <Navigate to="/main" /> : <LoginPage />} />
             <Route
@@ -86,7 +86,7 @@ function App() {
             />
           </Routes>
         </div>
-        <Footer />
+        {isLoggedIn && <Footer />}
       </div>
     </Router>
   );
