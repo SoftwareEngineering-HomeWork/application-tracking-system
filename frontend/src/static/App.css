@@ -140,6 +140,7 @@ input:focus-visible {
 .content {
   padding: 2rem;
   margin: 0 auto;
+  margin-left: 100px;
 }
 
 .direct-job-listings-container {
