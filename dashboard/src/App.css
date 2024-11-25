@@ -1,20 +1,20 @@
 .app-container {
-  display: flex;
-  padding-top: 50px;
+  /* display: flex; */
+  /* padding-top: 50px; */
   height: 90vh; 
   padding-bottom: 100px;
-  margin-bottom: 200px;
+  /* margin-bottom: 200px; */
   font-family: 'Arial', sans-serif;
 }
 
 .main-content {
-  display: flex;
+  /* display: flex; */
   flex-wrap: nowrap;
   padding: 30px;
-  padding-top: 100px;
-  padding-right: 100px;
+  /* padding-top: 100px;
+  padding-right: 100px; */
+  /* position: fixed; */
   flex-grow: 1;
-  margin-left: 200px; /* Adjust according to Sidebar width */
   gap: 20px;
 }
 

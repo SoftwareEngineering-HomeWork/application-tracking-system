@@ -5,14 +5,15 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   try {
-    const { companyname, password } = req.body;
+      console.log("request_body: ", req.body)
+      const { username, password, fullName } = req.body;
 
-    if (!companyname || !password) {
+    if (!username || !password || !fullName) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
     // Checking if the user already exists
-    const existingUser = await Recruiters.findOne({ companyname });
+    const existingUser = await Recruiters.findOne({ username });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
@@ -20,8 +21,9 @@ router.post("/", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new Recruiters({
-      companyname,
+      username,
       password: hashedPassword,
+      fullName
     });
 
     await newUser.save(); // Save the user to the database

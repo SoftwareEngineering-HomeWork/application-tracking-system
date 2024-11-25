@@ -3,12 +3,17 @@ const connectDB = require("./connect");
 const cors = require("cors");
 const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
+const recruiterLoginRouter = require("./routes/recruiterlogin");
+const recruitersignupRouter = require("./routes/recruitersignup");
 const profileRouter = require("./routes/profile");
+const recruiterprofileRouter = require("./routes/recruiterprofile");
 const applicationRouter = require("./routes/applications");
-const locationRouter=require('./routes/locations');
-const skillRouter=require('./routes/skills');
-const experienceRouter=require('./routes/experience');
-const matchingRouter=require('./routes/recruitermatching');
+const locationRouter = require('./routes/locations');
+const skillRouter = require('./routes/skills');
+const experienceRouter = require('./routes/experience');
+const matchingRouter = require('./routes/recruitermatching');
+const jobRouter = require('./routes/job');
+const directApplicationRouter = require('./routes/directapplications')
 const authmiddleware = require("./middlewares/authorization");
 const app = express();
 const port = 5001;
@@ -26,14 +31,19 @@ app.use(cors());
 //     authmiddleware(req, res, next); // Apply middleware for other routes
 // });
 
+app.use("/recruiter/signup", recruitersignupRouter);
+app.use("/recruiter/login", recruiterLoginRouter);
 app.use("/users/signup", signupRouter);
 app.use("/users/login", loginRouter);
 app.use("/profile", profileRouter);
+app.use("/recruiterprofile", recruiterprofileRouter);
 app.use("/applications", applicationRouter);
 app.use("/recruiter/locations", locationRouter);
 app.use("/recruiter/skills", skillRouter);
 app.use("/recruiter/experience", experienceRouter);
-app.use('/recruiter/matches',matchingRouter)
+app.use('/recruiter/matches', matchingRouter);
+app.use('/recruiter/jobs', jobRouter);
+app.use('/applications/apply', directApplicationRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Application Tracking Systems API");

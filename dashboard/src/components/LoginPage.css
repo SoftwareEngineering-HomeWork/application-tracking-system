@@ -1,0 +1,46 @@
+/* App.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  .auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .auth-inner {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 400px;
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  .nav-tabs {
+    border-bottom: none;
+    justify-content: center;
+  }
+  
+  .nav-tabs .nav-link {
+    border: none;
+    color: #007bff;
+    font-weight: 500;
+  }
+  
+  .nav-tabs .nav-link.active {
+    border-bottom: 2px solid #007bff;
+    color: #0056b3;
+  }
+  
+  .form-group label {
+    font-weight: 600;
+  }
+  
