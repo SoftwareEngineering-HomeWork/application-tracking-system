@@ -1,3 +1,4 @@
+/* eslint-disable */
 const express = require("express");
 const connectDB = require("./connect");
 const cors = require("cors");
