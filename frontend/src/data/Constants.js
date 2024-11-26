@@ -1,6 +1,8 @@
 const PROFILE = {
 	NAME: 'fullName',
 	EMAIL: 'email',
+	LINKEDIN_ID: "linkedinId" ,
+	GITHUB_ID: "githubId",
 	UNIVERSITY: 'institution',
 	ADDRESS: 'address',
 	CONTACT: 'phone_number',
@@ -8,6 +10,7 @@ const PROFILE = {
 	SKILLS: 'skills',
 	EXPERIENCE_LEVEL: 'job_levels'
 	// JOB_MODE: "modes",
+	
 };
 
 const COUNTRIES = [
