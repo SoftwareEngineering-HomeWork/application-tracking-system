@@ -43,6 +43,11 @@ function MainContent({ setIsLoggedIn }) {
     };
   }, [setIsLoggedIn]);
 
+  // Handler to update profile
+  const updateProfile = (updatedProfile) => {
+    setUserProfile(updatedProfile); // Update the state in MainContent
+  };
+
   if (!userProfile) {
     return <div>Loading...</div>;
   }
@@ -50,7 +55,7 @@ function MainContent({ setIsLoggedIn }) {
   return (
     <div className="main-content">
       <div className="top-left">
-        <ProfilePage profile={userProfile} />
+        <ProfilePage profile={userProfile} updateProfile={updateProfile} />
       </div>
     </div>
   );

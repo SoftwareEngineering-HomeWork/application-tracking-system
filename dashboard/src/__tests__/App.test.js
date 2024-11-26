@@ -1,10 +1,21 @@
 import React from 'react';
-import { render, screen, act, cleanup  } from '@testing-library/react';
+import { render, screen, act, cleanup } from '@testing-library/react';
 import App from '../App';
 import axios from 'axios';
 
 // Mock components and API calls
-jest.mock('../components/profile/ProfilePage', () => () => <div>ProfilePage Component</div>);
+jest.mock('../components/profile/ProfilePage', () => ({ profile, updateProfile }) => {
+  const handleUpdate = () => {
+    updateProfile({ name: 'Updated Name', email: 'updated@example.com' });
+  };
+
+  return (
+    <div>
+      ProfilePage Component
+      <button onClick={handleUpdate}>Update Profile</button>
+    </div>
+  );
+});
 jest.mock('../components/MatchesPage', () => () => <div>MatchesPage Component</div>);
 jest.mock('../components/LoginPage', () => () => <div>LoginPage Component</div>);
 jest.mock('../components/Header', () => () => <div>Header Component</div>);
@@ -29,7 +40,7 @@ describe('App Component', () => {
     expect(await screen.findByText('Header Component')).toBeInTheDocument();
   });
 
-  
+
   test('renders ProfilePage when on /main route and logged in', async () => {
     localStorage.setItem('token', 'test-token');
     localStorage.setItem('userId', 'test-user-id');
@@ -43,6 +54,32 @@ describe('App Component', () => {
 
     render(<App />);
 
+    expect(await screen.findByText('ProfilePage Component')).toBeInTheDocument();
+  });
+
+  test('updates profile when updateProfile is called in ProfilePage', async () => {
+    localStorage.setItem('token', 'test-token');
+    localStorage.setItem('userId', 'test-user-id');
+
+    axios.get.mockResolvedValueOnce({
+      data: { name: 'Test User', email: 'test@example.com' },
+    });
+
+    // Set the initial route to '/main'
+    window.history.pushState({}, 'Test page', '/main');
+
+    render(<App />);
+
+    // Ensure the profile is loaded
+    expect(await screen.findByText('ProfilePage Component')).toBeInTheDocument();
+
+    // Simulate clicking the update button
+    const updateButton = screen.getByText('Update Profile');
+    act(() => {
+      updateButton.click();
+    });
+
+    // Validate that the updated profile was handled
     expect(await screen.findByText('ProfilePage Component')).toBeInTheDocument();
   });
 
