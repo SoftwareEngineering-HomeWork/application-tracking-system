@@ -11,7 +11,6 @@ beforeEach(() => {
   mockAxios.reset(); // Reset mock data before each test
 });
 
-
   test('should open and close "My Applicants" modal', () => {
     render(<MyApplicantsCard recruiterId="123" />);
 
@@ -61,6 +60,42 @@ beforeEach(() => {
           email: 'john@example.com',
           phone_number: '1234567890',
           skills: [{ label: 'JavaScript' }, { label: 'React' }],
+          resume_url: 'http://example.com/resume.pdf',
+        },
+      },
+    ];
+  
+    mockAxios.onGet('http://localhost:5001/recruiter/jobs').reply(200, mockJobs);
+    mockAxios.onGet('http://localhost:5001/applications/apply', { params: { job_id: '1' } }).reply(200, mockApplicants);
+  
+    render(<MyApplicantsCard recruiterId="123" />);
+  
+    // Open "My Applicants" Modal
+    fireEvent.click(screen.getByText('Applicants'));
+  
+    await waitFor(() => {
+      expect(screen.getByText('Software Engineer')).toBeInTheDocument();
+    });
+  
+    // Open Applicants Modal
+    fireEvent.click(screen.getByText('Software Engineer'));
+  
+    await waitFor(() => {
+      expect(screen.getByText('John Doe')).toBeInTheDocument();
+      expect(screen.getByText('john@example.com')).toBeInTheDocument();
+    });
+  });
+
+  test('should fetch and display applicants for a specific job but no skills', async () => {
+    const mockJobs = [{ job_id: '1', job_title: 'Software Engineer', job_description: 'Develop applications' }];
+    const mockApplicants = [
+      {
+        _id: '1',
+        candidateInfo: {
+          fullName: 'John Doe',
+          email: 'john@example.com',
+          phone_number: '1234567890',
+          skills: [],
           resume_url: 'http://example.com/resume.pdf',
         },
       },
@@ -214,3 +249,116 @@ beforeEach(() => {
     consoleErrorSpy.mockRestore();
   });
   
+  test('should fetch and display applicants for a specific job', async () => {
+    const mockJobs = [
+      { job_id: '1', job_title: 'Software Engineer', job_description: 'Develop applications' }
+    ];
+    const mockApplicants = [
+      {
+        _id: '1',
+        candidateInfo: {
+          fullName: 'John Doe',
+          email: 'john@example.com',
+          phone_number: '1234567890',
+          skills: [{ label: 'JavaScript' }, { label: 'React' }],
+          resume_url: 'http://example.com/resume.pdf',
+        }
+      }
+    ];
+
+    mockAxios.onGet('http://localhost:5001/recruiter/jobs').reply(200, mockJobs);
+    mockAxios.onGet('http://localhost:5001/applications/apply', { params: { job_id: '1' } }).reply(200, mockApplicants);
+
+    render(<MyApplicantsCard recruiterId="123" />);
+
+    // Open "My Applicants" Modal
+    fireEvent.click(screen.getByText('Applicants'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Software Engineer')).toBeInTheDocument();
+    });
+
+    // Open Applicants Modal (triggering the applicant data load)
+    fireEvent.click(screen.getByText('Software Engineer'));
+
+    // Wait for the applicant data to load in the modal
+    await waitFor(() => {
+      expect(screen.getByText('John Doe')).toBeInTheDocument();  // This checks if the name appears
+      expect(screen.getByText('john@example.com')).toBeInTheDocument();  // Email check
+      expect(screen.getByText('1234567890')).toBeInTheDocument();  // Phone number check
+    });
+
+    // You can also check if the resume download button is there
+    expect(screen.getByRole('button', { name: /Download Resume/i })).toBeInTheDocument();
+  });
+
+  test('should handle resume download', async () => {
+    const mockJobs = [
+      { job_id: '1', job_title: 'Software Engineer', job_description: 'Develop applications' }
+    ];
+    const mockApplicants = [
+      {
+        userId: '1',
+        candidateInfo: {
+          fullName: 'John Doe',
+          email: 'john@example.com',
+          phone_number: '1234567890',
+          skills: [{ label: 'JavaScript' }, { label: 'React' }],
+          resume_url: 'http://example.com/resume.pdf',
+        }
+      }
+    ];
+
+    mockAxios.onGet('http://localhost:5001/recruiter/jobs').reply(200, mockJobs);
+    mockAxios.onGet('http://localhost:5001/applications/apply', { params: { job_id: '1' } }).reply(200, mockApplicants);
+
+    render(<MyApplicantsCard recruiterId="123" />);
+
+    // Open "My Applicants" Modal
+    fireEvent.click(screen.getByText('Applicants'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Software Engineer')).toBeInTheDocument();
+    });
+
+    // Open Applicants Modal (triggering the applicant data load)
+    fireEvent.click(screen.getByText('Software Engineer'));
+
+    // Wait for the applicant data to load in the modal
+    await waitFor(() => {
+      expect(screen.getByText('John Doe')).toBeInTheDocument(); // Check if John Doe is present
+    });
+
+    // Mock the axios.get for resume download
+    const mockDownload = jest.fn().mockResolvedValue({
+      data: new Blob(['dummy resume content'], { type: 'application/pdf' }) // Simulate the resume response
+    });
+
+    axios.get = mockDownload;
+
+    // Mock URL.createObjectURL
+    const createObjectURLSpy = jest.fn().mockReturnValue('mock-url');  // Directly mock the return value
+    
+    // Assign the mock to the global window.URL object
+    global.URL.createObjectURL = createObjectURLSpy;
+
+    // Simulate clicking the "Download Resume" button
+    fireEvent.click(screen.getByRole('button', { name: /Download Resume/i }));
+
+    // Wait for the download function to complete
+    await waitFor(() => {
+      expect(mockDownload).toHaveBeenCalledWith('http://localhost:5001/resume/download', {
+        responseType: 'blob',
+        headers: {
+          userid: '1',
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+
+      // Check that createObjectURL was called (indicating the download was triggered)
+      expect(createObjectURLSpy).toHaveBeenCalled();
+    });
+
+    // Clean up the mock
+    global.URL.createObjectURL.mockRestore();
+  });
