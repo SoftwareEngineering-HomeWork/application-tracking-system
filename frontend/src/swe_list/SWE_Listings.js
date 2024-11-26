@@ -11,7 +11,9 @@ const SWEListings = () => {
       try {
         const response = await axios.get('http://localhost:5002/swe-lists', {
           headers: {
-            'Access-Control-Allow-Origin': '*', // Allow all origins
+            Authorization: 'Bearer ' + localStorage.getItem('token'),
+            'Access-Control-Allow-Origin': 'http://localhost:3000',
+            'Access-Control-Allow-Credentials': 'true'
           },
         });
         const { companies, roles, locations, application_links } = response.data;
@@ -26,6 +28,7 @@ const SWEListings = () => {
         setListings(formattedListings);
         setLoading(false);
       } catch (err) {
+        console.log("error:", err)
         setError('Failed to fetch listings');
         setLoading(false);
       }

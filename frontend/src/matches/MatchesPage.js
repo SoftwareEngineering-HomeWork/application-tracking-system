@@ -22,6 +22,7 @@ const Recommendations = () => {
 
 	const fetchRecommendations = async () => {
 		try {
+			console.log("11111111111")
 			setIsFetchingJobs(true);
 			const response = await fetch('http://localhost:5002/swe-lists', {
 				headers: {
@@ -40,6 +41,7 @@ const Recommendations = () => {
 				setRecommendedJobs(data);
 			}
 		} catch (error) {
+			console.log("error:", error)
 			setFetchError(error.message);
 		} finally {
 			setIsFetchingJobs(false);
