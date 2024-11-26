@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import { Tabs, Tab } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './LoginPage.css'; // Custom styles for Login Page
@@ -8,7 +7,6 @@ import { getrecruiterToken, recruitersignUp, storeToken } from './api/loginHandl
 function LoginPage() {
   const [errorMessage, setErrorMessage] = useState(''); // Error handling state
   const [successMessage, setSuccessMessage] = useState(''); // Success message state
-  const navigate = useNavigate(); // React Router's navigation hook
 
   const handleLogin = async (username, password) => {
     setErrorMessage('');
@@ -18,7 +16,9 @@ function LoginPage() {
       console.log("response", response);
       storeToken(response); // Store token and user data in localStorage
       setSuccessMessage('Login successful!'); // Set success message
-      navigate('/main'); // Redirect to dashboard or home
+      setTimeout(() => {
+        window.location.href = '/main'; // Redirect to dashboard or home
+      }, 500);
     } catch (error) {
       setErrorMessage('Invalid login credentials. Please try again.');
     }
@@ -30,7 +30,9 @@ function LoginPage() {
     try {
       await recruitersignUp({ fullName: name, username, password }); // Call signup API
       setSuccessMessage('Signup successful! You can now log in.');
-      navigate('/main'); // Redirect to dashboard or home
+      setTimeout(() => {
+        window.location.href = '/main';
+      }, 500);
     } catch (error) {
       setErrorMessage('Signup failed. Please try again.');
     }

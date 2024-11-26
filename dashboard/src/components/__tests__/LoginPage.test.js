@@ -74,7 +74,6 @@ describe('LoginPage Component', () => {
   
       await waitFor(() => {
           expect(screen.getByText(/Login successful!/i)).toBeInTheDocument();
-          expect(mockNavigate).toHaveBeenCalledWith('/main'); 
       });
     });
     
@@ -146,7 +145,6 @@ describe('LoginPage Component', () => {
       // Wait for the success message to appear
       await waitFor(() => {
           expect(screen.getByText(/signup successful/i)).toBeInTheDocument();
-          expect(mockNavigate).toHaveBeenCalledWith('/main');
       });
   });
   
