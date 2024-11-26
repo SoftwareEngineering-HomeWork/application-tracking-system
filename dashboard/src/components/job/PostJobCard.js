@@ -293,6 +293,7 @@ const JobListCard = ({ recruiterId }) => {
                 className="card mb-3"
                 style={{ cursor: 'pointer', border: '1px solid #ccc', padding: '10px' }}
               >
+                
                 <h5>{job.job_title}</h5>
                 <p><strong>Job ID:</strong> {job.job_id}</p>
                 <p><strong>Location:</strong> {job.job_location}</p>
