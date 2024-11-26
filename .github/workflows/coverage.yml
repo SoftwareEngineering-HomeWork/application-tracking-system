@@ -18,10 +18,12 @@ jobs:
 
       - name: Install dependencies
       
-        run: npm install vitest @vitest/coverage-v8
+        run: npm install
 
       - name: Run tests
-        run: npx vitest run --coverage
+        run: |
+        cd dashboard
+        jest --config jest.config.js --coverage
 
       - name: Upload results to Codecov
         uses: codecov/codecov-action@v4
