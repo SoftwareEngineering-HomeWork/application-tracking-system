@@ -229,11 +229,7 @@ input:focus-visible {
   vertical-align: middle;
 }
 
-.linkedin-id:hover {
-  text-overflow: clip; /* Reveal full text on hover */
-  white-space: normal; /* Allow wrapping */
-  word-break: break-word; /* Break words if necessary */
-}
+
 
 .fa-linkedin, .fa-envelope {
   display: inline-block;
