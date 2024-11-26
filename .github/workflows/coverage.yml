@@ -13,12 +13,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Node
+      - name: Set up Node.js
         uses: actions/setup-node@v4
+        with:
+          node-version: '20.17.0'
 
       - name: Install dependencies and Run tests
         run: |
         cd dashboard
+        rm -rf node_modules
+        rm package-lock.json
         npm install
         jest --config jest.config.js --coverage
 
