@@ -67,12 +67,31 @@ const MyApplicantsCard = ({ recruiterId }) => {
   };
 
   // Handle resume download
-  const handleDownloadResume = (resumeUrl) => {
-    const link = document.createElement('a');
-    link.href = resumeUrl;
-    link.download = 'resume.pdf'; // Or get filename from the URL if available
-    link.click();
+  const handleDownloadResume = async (applicantId) => {
+    try {
+      // Send a request to the backend to download the resume for the applicant
+      const response = await axios.get('http://localhost:5001/resume/download', {
+        responseType: 'blob', // Important to handle the file response correctly
+        headers: {
+          userid: applicantId,
+          'Authorization': `Bearer ${localStorage.getItem('token')}` // Include the token for authentication
+        }
+      });
+  
+      // Create a link to trigger the download
+      const link = document.createElement('a');
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      link.href = url;
+      link.setAttribute('download', 'resume.pdf'); // Set the name of the downloaded file
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url); // Clean up the URL object
+    } catch (error) {
+      console.error('Error downloading the resume', error);
+    }
   };
+  
 
   return (
     <div>
@@ -143,8 +162,7 @@ const MyApplicantsCard = ({ recruiterId }) => {
                 <p><strong>Email:</strong> {applicant.candidateInfo.email}</p>
                 <p><strong>Phone:</strong> {applicant.candidateInfo.phone_number}</p>
                 <p>
-                  <strong>Skills: </strong> 
-                  {/* Render skills array */}
+                  <strong>Skills: </strong>
                   {applicant.candidateInfo.skills.length > 0 ? (
                     applicant.candidateInfo.skills.map((skill, index) => (
                       <span key={index}>
@@ -155,7 +173,7 @@ const MyApplicantsCard = ({ recruiterId }) => {
                     <span>No skills listed</span>
                   )}
                 </p>
-                <Button variant="primary" onClick={() => handleDownloadResume(applicant.candidateInfo.resume_url)}>
+                <Button variant="primary" onClick={() => handleDownloadResume(applicant.userId)}>
                   Download Resume
                 </Button>
               </div>
