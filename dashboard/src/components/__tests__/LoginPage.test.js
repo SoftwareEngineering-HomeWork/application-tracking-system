@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
 import LoginPage from '../LoginPage';
+import { MemoryRouter } from 'react-router-dom';
 import { getrecruiterToken, recruitersignUp, storeToken } from '../api/loginHandler';
 
 // Mock the API functions
@@ -10,10 +11,17 @@ jest.mock('../api/loginHandler', () => ({
   storeToken: jest.fn(),
 }));
 
+// Mock useNavigate
+const mockNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate,
+}));  
+
 describe('LoginPage Component', () => {
 
     beforeEach(() => {
-        render(<LoginPage />);
+      render(<LoginPage />);
     });
     
     it('renders login and signup tabs', () => {
@@ -66,6 +74,7 @@ describe('LoginPage Component', () => {
   
       await waitFor(() => {
           expect(screen.getByText(/Login successful!/i)).toBeInTheDocument();
+          expect(mockNavigate).toHaveBeenCalledWith('/main'); 
       });
     });
     
@@ -137,6 +146,7 @@ describe('LoginPage Component', () => {
       // Wait for the success message to appear
       await waitFor(() => {
           expect(screen.getByText(/signup successful/i)).toBeInTheDocument();
+          expect(mockNavigate).toHaveBeenCalledWith('/main');
       });
   });
   

@@ -174,4 +174,43 @@ beforeEach(() => {
     // Close Modal
     fireEvent.click(screen.getByRole('button', { name: /close/i }));
   });
+
+  test('should handle error when fetching applicants', async () => {
+    const mockJobs = [{ job_id: '1', job_title: 'Software Engineer', job_description: 'Develop applications' }];
+    
+    // Mock jobs endpoint to return valid data
+    mockAxios.onGet('http://localhost:5001/recruiter/jobs').reply(200, mockJobs);
+    
+    // Mock applicants endpoint to return an error
+    mockAxios.onGet('http://localhost:5001/applications/apply', { params: { job_id: '1' } }).reply(500);
+    
+    // Spy on console.error
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  
+    render(<MyApplicantsCard recruiterId="123" />);
+    
+    // Open "My Applicants" Modal
+    fireEvent.click(screen.getByText('Applicants'));
+  
+    await waitFor(() => {
+      expect(screen.getByText('Software Engineer')).toBeInTheDocument();
+    });
+  
+    // Open Applicants Modal (triggering the failing API call)
+    fireEvent.click(screen.getByText('Software Engineer'));
+  
+    await waitFor(() => {
+      // Check if loading stopped
+      expect(screen.queryByText('Loading applicants...')).not.toBeInTheDocument();
+  
+      // Ensure that the error message was logged to the console
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        'Error fetching applicants:',
+        expect.any(Error) // We expect an Error object to be passed
+      );
+    });
+  
+    // Clean up the spy
+    consoleErrorSpy.mockRestore();
+  });
   
