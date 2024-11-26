@@ -17,6 +17,7 @@ jobs:
         uses: actions/setup-node@v4
 
       - name: Install dependencies
+        run: cd dashboard
         run: npm install
 
       - name: Run tests

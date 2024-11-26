@@ -1,38 +1,38 @@
-name: Run Tests
+# name: Run Tests
 
-on:
-  push:
-    branches:
-      - dev
-  pull_request:
-    branches:
-      - dev
+# on:
+#   push:
+#     branches:
+#       - dev
+#   pull_request:
+#     branches:
+#       - dev
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14' # Specify the Node.js version you are using
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: '14' # Specify the Node.js version you are using
 
-      - name : Install frontend dependencies
-        run: npm install
-        working-directory: dashboard
+#       - name : Install frontend dependencies
+#         run: npm install
+#         working-directory: dashboard
 
-      - name : Run tests in frontend
-        run : npm test
-        working-directory: dashboard
+#       - name : Run tests in frontend
+#         run : npm test
+#         working-directory: dashboard
 
-      # - name: Install dependencies
-      #   run: npm install
-      #   working-directory: new_backend
+#       # - name: Install dependencies
+#       #   run: npm install
+#       #   working-directory: new_backend
 
-      # - name: Run tests in new_backend
-      #   run: npm test
-      #   working-directory: new_backend
+#       # - name: Run tests in new_backend
+#       #   run: npm test
+#       #   working-directory: new_backend
