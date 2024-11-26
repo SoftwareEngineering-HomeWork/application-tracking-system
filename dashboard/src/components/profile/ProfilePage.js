@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { CONSTANTS } from '../data/Constants';
 import { faEnvelope, faLocationDot, faPenToSquare, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { PostJobCard, JobListCard } from '../job/PostJobCard';
-import MyApplicantsCard from '../applicants/MyApplicatnsCard';
+import MyApplicantsCard from '../applicants/MyApplicantsCard';
 
 const ProfilePage = (props) => {
   const [profileModalOpen, setProfileModalOpen] = useState(false);
@@ -19,9 +19,9 @@ const ProfilePage = (props) => {
       }
       return <span style={{ fontSize: 60, letterSpacing: 1.2 }}>{initials}</span>;
     }
-    return (
+    return (  
       <span style={{ fontSize: 60, letterSpacing: 1.2 }}>
-        <FontAwesomeIcon icon='fa-solid fa-user' style={{ color: '#fbfcfe' }} />
+        <FontAwesomeIcon icon='fa-solid fa-user' style={{ color: '#fbfcfe' }} aria-label='User Icon'/>
       </span>
     );
   };
@@ -37,6 +37,8 @@ const ProfilePage = (props) => {
               onClick={() => setProfileModalOpen(true)}
               cursor='pointer'
               style={{ position: 'absolute', top: '15', right: '15' }}
+              role="button"
+              aria-label="Edit Profile"
             />
             <div className='text-center my-3'>
               <div
@@ -54,22 +56,22 @@ const ProfilePage = (props) => {
               </div>
             </div>
             <div className='text-center mt-3'>
-              <h3 className='card-title mb-1'>{profile[CONSTANTS.PROFILE.NAME] || ''}</h3>
-              <span style={{ fontSize: 20 }}>{profile[CONSTANTS.PROFILE.UNIVERSITY] || ''}</span>
+              <h3 className='card-title mb-1'>{profile[CONSTANTS.PROFILE.NAME]}</h3>
+              <span style={{ fontSize: 20 }}>{profile[CONSTANTS.PROFILE.UNIVERSITY]}</span>
             </div>
             <hr className='my-4' />
             <div className='row gy-4'>
               <div className='col-12 d-flex align-items-center'>
                 <FontAwesomeIcon icon={faEnvelope} size='1x' />
-                <span className='mx-2'>{profile[CONSTANTS.PROFILE.EMAIL] || ''}</span>
+                <span className='mx-2'>{profile[CONSTANTS.PROFILE.EMAIL]}</span>
               </div>
               <div className='col-12 d-flex align-items-center'>
                 <FontAwesomeIcon icon={faPhone} size='1x' />
-                <span className='mx-2'>{profile[CONSTANTS.PROFILE.CONTACT] || ''}</span>
+                <span className='mx-2'>{profile[CONSTANTS.PROFILE.CONTACT]}</span>
               </div>
               <div className='col-12 d-flex align-items-center'>
                 <FontAwesomeIcon icon={faLocationDot} size='1x' />
-                <span className='mx-2'>{profile[CONSTANTS.PROFILE.ADDRESS] || ''}</span>
+                <span className='mx-2'>{profile[CONSTANTS.PROFILE.ADDRESS]}</span>
               </div>
             </div>
           </div>

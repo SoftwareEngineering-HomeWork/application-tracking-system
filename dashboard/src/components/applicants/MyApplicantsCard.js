@@ -88,7 +88,7 @@ const MyApplicantsCard = ({ recruiterId }) => {
         }}
         onClick={handleOpenModal}
       >
-        <h5>My Applicants</h5>
+        <h5>Applicants</h5>
       </div>
 
       {/* My Applicants Modal */}
