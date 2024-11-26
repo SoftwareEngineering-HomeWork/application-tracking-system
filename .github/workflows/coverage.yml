@@ -1,34 +1,32 @@
 name: Run tests and upload coverage
 
-on:
-  push:
-    branches:
-      - main  # You can specify your branch name if needed
+on: 
+  push
 
 jobs:
   test:
     name: Run tests and collect coverage
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Set up Node.js
+      - name: Set up Node
         uses: actions/setup-node@v4
 
       - name: Install dependencies
         run: |
           cd dashboard
-          npm install  # Runs npm install inside the 'dashboard' folder
+          npm install
 
       - name: Run tests
         run: |
           cd dashboard
-          npm run test  # Runs the tests inside the 'dashboard' folder
+          npm run test
 
       - name: Upload results to Codecov
         uses: codecov/codecov-action@v4
         with:
-          token: ${{ secrets.TRACKING_SYSTEM }}  # Use the correct secret for your Codecov token
+          token: ${{ secrets.TRACKING_SYSTEM }}
