@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   authTokens: [{ type: mongoose.Schema.Types.Mixed }],
   email: { type: String },
   applications: [{ type: mongoose.Schema.Types.Mixed }],
-  resume: { type: String },
+  resume: { type: Buffer, default: null }, // Store resume as binary data (Buffer)
   skills: [{ type: mongoose.Schema.Types.Mixed }],
   job_levels: [{ type: mongoose.Schema.Types.Mixed }],
   locations: [{ type: mongoose.Schema.Types.Mixed }],
@@ -26,6 +26,7 @@ userSchema.methods.toJSON = function () {
     id: userObject._id,
     fullName: userObject.fullName,
     username: userObject.username,
+    resume: userObject.resume, // Include resume data in the response
   };
 };
 

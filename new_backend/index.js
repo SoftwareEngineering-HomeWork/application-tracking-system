@@ -14,6 +14,7 @@ const experienceRouter = require('./routes/experience');
 const matchingRouter = require('./routes/recruitermatching');
 const jobRouter = require('./routes/job');
 const directApplicationRouter = require('./routes/directapplications')
+const resumeRouter = require('./routes/resumes')
 const authmiddleware = require("./middlewares/authorization");
 const app = express();
 const port = 5001;
@@ -44,6 +45,7 @@ app.use("/recruiter/experience", experienceRouter);
 app.use('/recruiter/matches', matchingRouter);
 app.use('/recruiter/jobs', jobRouter);
 app.use('/applications/apply', directApplicationRouter);
+app.use('/resume', resumeRouter);
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Application Tracking Systems API");
