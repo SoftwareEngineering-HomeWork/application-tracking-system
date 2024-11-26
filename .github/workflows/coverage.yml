@@ -16,13 +16,10 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
 
-      - name: Install dependencies
-      
-        run: npm install
-
-      - name: Run tests
+      - name: Install dependencies and Run tests
         run: |
         cd dashboard
+        npm install
         jest --config jest.config.js --coverage
 
       - name: Upload results to Codecov
