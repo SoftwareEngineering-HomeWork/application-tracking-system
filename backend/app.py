@@ -42,16 +42,16 @@ def create_app():
     CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
     # get all the variables from the application.yml file
-    with open("application.yml") as f:
-        info = yaml.load(f, Loader=yaml.FullLoader)
-        GOOGLE_CLIENT_ID = info["GOOGLE_CLIENT_ID"]
-        GOOGLE_CLIENT_SECRET = info["GOOGLE_CLIENT_SECRET"]
-        CONF_URL = info["CONF_URL"]
-        app.secret_key = info['SECRET_KEY']
+    # with open("application.yml") as f:
+    #     info = yaml.load(f, Loader=yaml.FullLoader)
+    #     GOOGLE_CLIENT_ID = info["GOOGLE_CLIENT_ID"]
+    #     GOOGLE_CLIENT_SECRET = info["GOOGLE_CLIENT_SECRET"]
+    #     CONF_URL = info["CONF_URL"]
+    #     app.secret_key = info['SECRET_KEY']
 
-    app.config["CORS_HEADERS"] = "Content-Type"
+    # app.config["CORS_HEADERS"] = "Content-Type"
 
-    oauth = OAuth(app)
+    # oauth = OAuth(app)
 
     @app.errorhandler(404)
     def page_not_found():
@@ -238,7 +238,7 @@ def create_app():
                 return jsonify({"error": "Username already exists"}), 400
             password = data["password"]
             password_hash = hashlib.md5(password.encode())
-            user = Users(x
+            user = Users(
                 id=get_new_user_id(),
                 fullName=data["fullName"],
                 username=data["username"],
@@ -704,14 +704,12 @@ app = create_app()
 
 
 with open("application.yml") as f:
-    info = yaml.load(f, Loader=yaml.FullLoader)
-    username = info["USERNAME"]
-    password = info["PASSWORD"]
-    cluster_url = info["CLUSTER_URL"]
+    info = yaml.safe_load(f)  
+    mongodb_uri = info["MONGODB_URI"]
     # ca=certifi.where()
     app.config["MONGODB_SETTINGS"] = {
         "db": "appTracker",
-        "host": f"mongodb+srv://{username}:{password}@{cluster_url}/",
+        "host": "mongodb_uri",
     }
 db = MongoEngine()
 db.init_app(app)
@@ -793,5 +791,5 @@ def get_new_application_id(user_id):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5002)
 
