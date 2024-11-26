@@ -194,6 +194,7 @@ def create_app():
                     id=get_new_user_id(),
                     fullName=full_name,
                     email=users_email,
+                    linkedinId="",
                     authTokens=[],
                     applications=[],
                     skills=[],
@@ -238,7 +239,7 @@ def create_app():
                 return jsonify({"error": "Username already exists"}), 400
             password = data["password"]
             password_hash = hashlib.md5(password.encode())
-            user = Users(x
+            user = Users(
                 id=get_new_user_id(),
                 fullName=data["fullName"],
                 username=data["username"],
@@ -251,7 +252,8 @@ def create_app():
                 phone_number="",
                 address="",
                 institution="",
-                email=""
+                email="",
+                linkedinId=""
             )
             # user.save()
             # del user.to_json()["password", "authTokens"]
@@ -278,6 +280,7 @@ def create_app():
             profileInformation["phone_number"] = user["phone_number"]
             profileInformation["address"] = user["address"]
             profileInformation["email"] = user["email"]
+            profileInformation["linkedinId"]: user["linkedinId"]
             profileInformation["fullName"] = user["fullName"]
 
             return jsonify(profileInformation)
@@ -397,7 +400,8 @@ def create_app():
                 "address": user.address,
                 "locations": user.locations,
                 "jobLevels": user.job_levels,
-                "email": user.email
+                "email": user.email,
+                "linkedinId":user.linkedinId
             }
             return jsonify({"profile": profileInfo, "token": token, "expiry": expiry_str})
         except:
@@ -728,6 +732,7 @@ class Users(db.Document):
     password = db.StringField()
     authTokens = db.ListField()
     email = db.StringField()
+    linkedinId = db.StringField()
     applications = db.ListField()
     resume = db.FileField()
     skills = db.ListField()
@@ -743,7 +748,7 @@ class Users(db.Document):
 
         :return: JSON object
         """
-        return {"id": self.id, "fullName": self.fullName, "username": self.username}
+        return {"id": self.id, "fullName": self.fullName, "username": self.username, "linkedinId":self.linkedinId}
 
 
 def get_new_user_id():

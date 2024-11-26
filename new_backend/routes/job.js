@@ -5,8 +5,8 @@ const Job = require("../models/Job_Model");
 
 // POST request to create a job (no changes here)
 router.post('/', (req, res) => {
-    const { recruiterId, job_id, ...jobData } = req.body;
-  
+    const { recruiterId, job_id, salary_min, salary_max, ...jobData } = req.body;
+    
     if (!recruiterId || !job_id) {
       return res.status(400).json({ error: 'recruiterId and job_id are required' });
     }
@@ -14,6 +14,10 @@ router.post('/', (req, res) => {
     const newJob = new Job({
       recruiter_id: recruiterId,
       job_id: job_id, // Include job_id
+      salary_range: {
+        min: salary_min,
+        max: salary_max
+      },
       ...jobData,
     });
   
@@ -40,6 +44,7 @@ router.get('/', (req, res) => {
             if (!jobs || jobs.length === 0) {
                 return res.status(404).json({ message: 'No jobs found' });
             }
+            
             res.status(200).json(jobs); // Return the jobs in the response
         })
         .catch((err) => {

@@ -219,3 +219,31 @@ input:focus-visible {
   text-align: center;
   vertical-align: middle;
 }
+
+.linkedin-id {
+  display: inline-block;
+  max-width: 100%; /* Adjust the width dynamically */
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Ensure overflowing text is hidden */
+  text-overflow: ellipsis; /* Add ellipsis for long text */
+  vertical-align: middle;
+}
+
+
+
+.fa-linkedin, .fa-envelope {
+  display: inline-block;
+  margin-right: 0.5rem; /* Consistent spacing */
+  vertical-align: middle; /* Ensures vertical alignment with text */
+}
+
+.col-12.d-flex.align-items-center {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Adjust spacing between icon and text */
+}
+
+.col-12.d-flex.align-items-center a {
+  text-decoration: none; /* Remove underline for the link */
+  color: inherit; /* Use the same text color */
+}

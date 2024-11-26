@@ -20,13 +20,14 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "PORT=8000 react-scripts start",
+    "start": "cross-env PORT=8000 react-scripts start",
     "build": "react-scripts build",
     "test": "jest --config jest.config.js --coverage",
     "test:watch": "jest --watch",
     "eject": "react-scripts eject",
     "coverage": "jest --coverage"
   },
+  "proxy": "http://localhost:5001",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -61,6 +62,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "axios-mock-adapter": "^2.1.0",
     "babel-jest": "^29.7.0",
+    "cross-env": "^7.0.3",
     "identity-obj-proxy": "^3.0.0"
   }
 }
