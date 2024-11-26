@@ -29,9 +29,12 @@ router.post('/', async (req, res) => {
       candidateInfo: {
         fullName: user.fullName,
         email: user.email,
+        linkedinId: user.linkedinId,
+        githubId: user.githubId,
         skills: user.skills,
         resume: user.resume,
-        phone_number: user.phone_number
+        phone_number: user.phone_number,
+        
       },
     });
 

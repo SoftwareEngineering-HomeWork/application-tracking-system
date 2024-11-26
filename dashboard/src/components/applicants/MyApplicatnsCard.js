@@ -33,7 +33,7 @@ const MyApplicantsCard = ({ recruiterId }) => {
       const applicantsResponse = await axios.get('http://localhost:5001/applications/apply', {
         params: { job_id: jobId },
       });
-      console.log("applicantsResponse: ", applicantsResponse)
+      console.log("applicantsResponse: ", applicantsResponse.data)
       setApplicants(applicantsResponse.data);
       setLoading(false);
     } catch (err) {
@@ -141,6 +141,26 @@ const MyApplicantsCard = ({ recruiterId }) => {
               <div key={applicant._id} className="card mb-3" style={{ cursor: 'pointer', border: '1px solid #ccc', padding: '10px' }}>
                 <p><strong>Name:</strong> {applicant.candidateInfo.fullName}</p>
                 <p><strong>Email:</strong> {applicant.candidateInfo.email}</p>
+                <p>
+                  <strong>LinkedIn:</strong>{' '}
+                  {applicant?.candidateInfo?.linkedinId ? (
+                    <a href={applicant.candidateInfo.linkedinId} target="_blank" rel="noopener noreferrer">
+                      {applicant.candidateInfo.linkedinId}
+                    </a>
+                  ) : (
+                    <span>No LinkedIn profile available</span>
+                  )}
+                </p>
+                <p>
+                  <strong>Github:</strong>{' '}
+                  {applicant?.candidateInfo?.githubId ? (
+                    <a href={applicant.candidateInfo.githubId} target="_blank" rel="noopener noreferrer">
+                      {applicant.candidateInfo.githubId}
+                    </a>
+                  ) : (
+                    <span>No Github profile available</span>
+                  )}
+                </p>
                 <p><strong>Phone:</strong> {applicant.candidateInfo.phone_number}</p>
                 <p>
                   <strong>Skills: </strong> 

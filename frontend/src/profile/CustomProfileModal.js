@@ -95,6 +95,34 @@ const CustomProfileModal = (props) => {
 							}
 						/>
 					</Form.Group>
+					<Form.Group className="my-3">
+						<Form.Label>LinkedIn ID</Form.Label>
+						<Form.Control
+							type="text"
+							placeholder="Enter LinkedIn ID"
+							value={data[CONSTANTS.PROFILE.LINKEDIN_ID]}
+							onChange={(e) =>
+								setData({
+									...data,
+									[CONSTANTS.PROFILE.LINKEDIN_ID]: e.target.value
+								})
+							}
+						/>
+					</Form.Group>
+					<Form.Group className="my-3">
+						<Form.Label>Github ID</Form.Label>
+						<Form.Control
+							type="text"
+							placeholder="Enter Github ID"
+							value={data[CONSTANTS.PROFILE.GITHUB_ID]}
+							onChange={(e) =>
+								setData({
+									...data,
+									[CONSTANTS.PROFILE.GITHUB_ID]: e.target.value
+								})
+							}
+						/>
+					</Form.Group>
 					<Form.Group className='my-3'>
 						<Form.Label>Address</Form.Label>
 						<Form.Control

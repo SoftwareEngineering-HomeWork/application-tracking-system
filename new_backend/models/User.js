@@ -6,6 +6,8 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   authTokens: [{ type: mongoose.Schema.Types.Mixed }],
   email: { type: String },
+  linkedinId: { type: String },
+  githubId: { type: String },
   applications: [{ type: mongoose.Schema.Types.Mixed }],
   resume: { type: String },
   skills: [{ type: mongoose.Schema.Types.Mixed }],
@@ -26,6 +28,8 @@ userSchema.methods.toJSON = function () {
     id: userObject._id,
     fullName: userObject.fullName,
     username: userObject.username,
+    linkedinId: userObject.linkedinId,
+    githubId: userObject.githubId,
   };
 };
 

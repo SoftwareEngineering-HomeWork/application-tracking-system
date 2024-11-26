@@ -23,6 +23,8 @@ router.get("/", async (req, res) => {
       phone_number: user.phone_number,
       address: user.address,
       email: user.email,
+      linkedinId: user.linkedinId,
+      githubId: user.githubId,
       fullName: user.fullName,
       extensionDetails: user.extensionDetails,
     };
