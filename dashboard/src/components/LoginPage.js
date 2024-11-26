@@ -13,9 +13,12 @@ function LoginPage() {
     setSuccessMessage('');
     try {
       const response = await getrecruiterToken({ username, password }); // Call login API
-	  console.log("response", response)
+      console.log("response", response);
       storeToken(response); // Store token and user data in localStorage
-      window.location.href = '/main'; // Redirect to dashboard or home
+      setSuccessMessage('Login successful!'); // Set success message
+      setTimeout(() => {
+        window.location.href = '/main'; // Redirect to dashboard or home
+      }, 500);
     } catch (error) {
       setErrorMessage('Invalid login credentials. Please try again.');
     }
@@ -27,6 +30,9 @@ function LoginPage() {
     try {
       await recruitersignUp({ fullName: name, username, password }); // Call signup API
       setSuccessMessage('Signup successful! You can now log in.');
+      setTimeout(() => {
+        window.location.href = '/main';
+      }, 500);
     } catch (error) {
       setErrorMessage('Signup failed. Please try again.');
     }
@@ -35,8 +41,6 @@ function LoginPage() {
   return (
     <div className="auth-wrapper">
       <div className="auth-inner">
-        {/* <h2 className="text-center mb-4">JTracker</h2> */}
-
         {/* Error or Success Messages */}
         {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
         {successMessage && <div className="alert alert-success">{successMessage}</div>}

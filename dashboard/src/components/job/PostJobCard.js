@@ -211,7 +211,7 @@ const PostJobCard = ({ recruiterId, updateRecruiterData }) => {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Job Description Upload</Form.Label>
-              <Form.Control type="file" onChange={handleFileChange} />
+              <Form.Control type="file" onChange={handleFileChange} data-testid="job-description-upload"/>
             </Form.Group>
           </Form>
         </ModalBody>
