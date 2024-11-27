@@ -17,6 +17,7 @@
 [test-url]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/actions/workflows/test.yml
 [lint-badge]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/actions/workflows/lint.yml/badge.svg
 [lint-url]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/actions/workflows/lint.yml
+[![Node Lint](https://github.com/WolfByteCollective/application-tracking-system/actions/workflows/lint.yml/badge.svg?branch=dev)](https://github.com/WolfByteCollective/application-tracking-system/actions/workflows/lint.yml)
 
 
 
