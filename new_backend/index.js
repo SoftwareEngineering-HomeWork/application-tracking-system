@@ -16,7 +16,7 @@ const matchingRouter = require('./routes/recruitermatching');
 const jobRouter = require('./routes/job');
 const directApplicationRouter = require('./routes/directapplications')
 const resumeRouter = require('./routes/resumes')
-const authmiddleware = require("./middlewares/authorization");
+// const authmiddleware = require("./middlewares/authorization");
 const app = express();
 const port = 5001;
 

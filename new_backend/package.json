@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "npx mocha tests/*.test.js",
+    "test": "nyc mocha tests/*.test.js",
     "format": "prettier --write '**/*.{js,json,md}'"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vitest/coverage-v8": "^2.1.6",
     "bcrypt": "^5.1.1",
     "chai": "^4.3.4",
     "chai-http": "^4.0.0",
@@ -24,7 +25,9 @@
     "nodemon": "^3.1.7",
     "prettier": "^3.3.3",
     "sinon": "^19.0.2",
-    "uuid": "^10.0.0"
+    "supertest": "^7.0.0",
+    "uuid": "^10.0.0",
+    "vitest": "^2.1.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
@@ -33,6 +36,8 @@
     "eslint": "^9.15.0",
     "eslint-plugin-react": "^7.37.2",
     "globals": "^15.12.0",
+    "mocha": "^10.8.2",
+    "nyc": "^17.1.0",
     "typescript-eslint": "^8.16.0"
   }
 }
