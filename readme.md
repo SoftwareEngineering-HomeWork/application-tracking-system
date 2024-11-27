@@ -3,6 +3,7 @@
 [![GitHub license](https://img.shields.io/github/license/jashgopani/application-tracking-system)](https://github.com/jashgopani/application-tracking-system/blob/main/LICENSE)
 [![DOI](https://zenodo.org/badge/888249753.svg)](https://doi.org/10.5281/zenodo.14226727)
 [![codecov](https://codecov.io/gh/SoftwareEngineering-HomeWork/application-tracking-system/branch/main/graph/badge.svg)](https://codecov.io/gh/SoftwareEngineering-HomeWork/application-tracking-system)
+[![Coverage](https://github.com/WolfByteCollective/application-tracking-system/actions/workflows/coverage.yml/badge.svg?branch=dev)](https://github.com/WolfByteCollective/application-tracking-system/actions/workflows/coverage.yml)
 [![GitHub issues](https://img.shields.io/github/issues/SoftwareEngineering-HomeWork/application-tracking-system)](https://github.com/jashgopani/application-tracking-system/issues)
 [![Github closes issues](https://img.shields.io/github/issues-closed-raw/SoftwareEngineering-HomeWork/application-tracking-system)](https://github.com/jashgopani/application-tracking-system/issues?q=is%3Aissue+is%3Aclosed)
 ![GitHub top language](https://img.shields.io/github/languages/top/SoftwareEngineering-HomeWork/application-tracking-system)
