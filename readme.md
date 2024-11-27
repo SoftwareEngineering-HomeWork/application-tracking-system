@@ -77,57 +77,38 @@ The project aims to build a robust recruitment platform through four strategic m
 
 ## Samples:
 
-### Login Page / Signup Page
+### Recruiter Dashboard
 
-The introductory visual interface displayed from which a user is able to register and log into the application. 
-![image](https://github.com/user-attachments/assets/22090e96-9356-4256-9180-86ada115f8c9)
-
-![image](https://github.com/user-attachments/assets/df60db51-e533-489e-bac6-659d252c4468)
+The introductory visual interface displayed from which a Recruiter is able to register and log into the application. 
+![image](images/recruiter_dashboard.png)
 
 
+### Recruiter - Post Job
 
-### HomeScreen - Profile Page
+After Logging In, the recruiter can post a job by filling in various fields.
 
-After Logging In, the Profile page of the user is displayed where the user details such as Name, Institution, email, phone number, address, skills, and more are shown.
-Users can add or update information to their profile, such as their personal information, skills, preferred job locations, and their experience level.
-
-![image](https://github.com/user-attachments/assets/0fa1e5ec-d6d1-4980-98c5-c4a7eff055c8)
+![image](images/post_a_job.png)
 
 
-### SearchPage
+### Recruiter - Job Postings
 
-The interface through which a user is able to search for specific jobs and apply on them through the 'Apply' button.
+The Recruiter can look at all the job postings he/she has posted. 
 
-1. Navigate to Job search page, search for particular Job.
-2. Click on Details button to see the Job Details
-3. Click on Apply button which will redirect to the Job Apply link.
+![image](images/posted_jobs.png)
 
-<p align="center"><img width="700" src="./resources/search_roles_companywise.png"></p> 
-<p align="center"><img width="700" src="./resources/FindJobs.png"></p>
-<p align="center"><img width="700" src="./resources/Job_Description.png"></p>
+### Recruiter - Applicants
 
-### ApplicationPage
+The recruiter can see the details of the applicants that have applied to his job postings
 
-The user is able to access different saved applications - Waitlisted applications, Waiting for Refereals, Applied Jobs, Application Status. The user can also add more jobs to track through this screen.
+![image](images/applicants-for-job.png)
 
-![image](https://github.com/user-attachments/assets/e2e8a374-1a4f-49bd-8386-77eee2419cb4)
+### Resume Upload
 
-
-<p align="center"><img width="700" src="./resources/AddApplicationpage.png"></p>
+![image](images/document_upload.png)
 
 ### MatchesPage
 
-On this page, user can see different jobs that would be recommended to them based on their profile and their preferences. User can apply for that position from this page too.
-
-<p align="center"><img width="700" src="./resources/Recommendjobspage.png"></p>
-
-## Chrome extension
-![image](https://github.com/user-attachments/assets/283a83cd-48c0-4414-8e2a-d90e3a52fc2e)
-
-## Recruitor Dashboard
-![image](https://github.com/user-attachments/assets/6ac9e593-ad88-401a-9894-0f00a7d400ed)
-![image](https://github.com/user-attachments/assets/5b4bb569-1fe3-4cfb-b7d4-fa1266f04661)
-
+![image](images/webscraping.png)
 
 
 ## Future Scope:
