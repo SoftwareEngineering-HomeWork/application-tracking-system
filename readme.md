@@ -2,7 +2,8 @@
 
 [![GitHub license](https://img.shields.io/github/license/jashgopani/application-tracking-system)](https://github.com/jashgopani/application-tracking-system/blob/main/LICENSE)
 [![DOI](https://zenodo.org/badge/888249753.svg)](https://doi.org/10.5281/zenodo.14226727)
-[![codecov](https://codecov.io/gh/SoftwareEngineering-HomeWork/application-tracking-system/branch/main/graph/badge.svg)](https://codecov.io/gh/SoftwareEngineering-HomeWork/application-tracking-system)
+[![codecov](https://codecov.io/gh/WolfByteCollective/application-tracking-system/branch/dev/graph/badge.svg?token=JAfWUk5pfm)](https://codecov.io/gh/WolfByteCollective/application-tracking-system)
+
 [![Coverage](https://github.com/WolfByteCollective/application-tracking-system/actions/workflows/coverage.yml/badge.svg?branch=dev)](https://github.com/WolfByteCollective/application-tracking-system/actions/workflows/coverage.yml)
 [![GitHub issues](https://img.shields.io/github/issues/SoftwareEngineering-HomeWork/application-tracking-system)](https://github.com/jashgopani/application-tracking-system/issues)
 [![Github closes issues](https://img.shields.io/github/issues-closed-raw/SoftwareEngineering-HomeWork/application-tracking-system)](https://github.com/jashgopani/application-tracking-system/issues?q=is%3Aissue+is%3Aclosed)
@@ -13,10 +14,7 @@
 
 [prettier-badge]:https://img.shields.io/badge/code--formatter-Prettier-blue
 [prettier-url]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/blob/dev/new_backend/package.json#L23
-[test-badge]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/actions/workflows/test.yml/badge.svg
-[test-url]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/actions/workflows/test.yml
-[lint-badge]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/actions/workflows/lint.yml/badge.svg
-[lint-url]:https://github.com/SoftwareEngineering-HomeWork/application-tracking-system/actions/workflows/lint.yml
+
 [![Node Lint](https://github.com/WolfByteCollective/application-tracking-system/actions/workflows/lint.yml/badge.svg?branch=dev)](https://github.com/WolfByteCollective/application-tracking-system/actions/workflows/lint.yml)
 
 
