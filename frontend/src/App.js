@@ -11,6 +11,7 @@ import ProfilePage from './profile/ProfilePage';
 import MatchesPage from './matches/MatchesPage';
 import axios from 'axios';
 import SWEListings from './swe_list/SWE_Listings';
+import DirectJobListingPage from './directjoblistings/DirectJobListingPage';
 
 const App = () => {
 	const [currentPage, setCurrentPage] = useState(<LoginPage />);
@@ -71,6 +72,9 @@ const App = () => {
 			case 'ManageResumePage':
 				setCurrentPage(<ManageResumePage />);
 				break;
+			case 'DirectJobListingPage':
+				setCurrentPage(<DirectJobListingPage />);
+				break;
 			case 'MatchesPage':
 				setCurrentPage(<SWEListings />);
 				break;
@@ -82,7 +86,7 @@ const App = () => {
 	return (
 		<Router>
 			<div className='main-page'>
-				{sidebar && <Sidebar switchPage={switchPage} handleLogout={handleLogout} />}
+				{sidebar && <div className="sidebar-container"><Sidebar switchPage={switchPage} handleLogout={handleLogout} /></div>}
 				<div className='main'>
 					<div className='content'>
 						<Routes>

@@ -1,4 +1,4 @@
-name: Run tests and upload coverage
+name: Tests
 
 on: 
   push
@@ -16,13 +16,32 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
 
-      - name: Install dependencies
-        run: npm install vitest @vitest/coverage-v8
+      - name: Install dependencies (frontend)
+        run: |
+          cd dashboard
+          npm install
 
-      - name: Run tests
-        run: npx vitest run --coverage
+      - name: Run frontend tests
+        run: |
+          cd dashboard
+          npm run test
 
-      - name: Upload results to Codecov
+      - name: Upload frontend coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          token: ${{ secrets.TRACKING_SYSTEM }}
+
+      - name: Install dependencies (backend)
+        run: |
+          cd new_backend
+          npm install
+
+      - name: Run backend tests
+        run: |
+          cd new_backend
+          npm run test
+
+      - name: Upload backend coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.TRACKING_SYSTEM }}

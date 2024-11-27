@@ -37,6 +37,7 @@ router.post("/", async (req, res) => {
     const profileInfo = {
       id: user._id,
       fullName: user.fullName,
+      userId: user.username,
       institution: user.institution,
       skills: user.skills,
       phone_number: user.phone_number,

@@ -14,25 +14,19 @@
   color: white;
 }
 
-/* .col {
-  border: 1px solid;
-  padding-left: unset;
-  padding-right: unset;
-  margin-left: 5px;
-  margin-top: 1px;
-} */
-
 .header-table {
   padding: 0.5rem 1rem;
   margin-bottom: 0;
   background-color: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
+
 .main {
   overflow: auto;
   min-height: 100vh;
   /* background-color: #ebf0f7; */
 }
+
 .content {
   padding-right: 7.5rem;
   padding-left: 7.5rem;
@@ -56,23 +50,13 @@
 .full-content-text {
   display: none;
 }
-/*
-  small-content-text
-  */
 
 .delet-btn {
   visibility: visible;
   opacity: 1;
   display: contents;
 }
-/* .card-body {
-  flex: 1 1 auto;
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: rgb(99 99 99 / 10%) 0px 2px 8px 0px;
-  width: 100%;
-} */
+
 .card-body:active {
   /* cursor: move;
   outline: 3px dashed #7b7b7b;
@@ -112,6 +96,7 @@
   padding: 10px;
   border-radius: 100%;
 }
+
 .card-body.new-col {
   text-align: center;
 }
@@ -139,39 +124,54 @@ input:focus-visible {
   flex-direction: row;
   background-color: #ebf0f7;
 }
+
+.sidebar-container {
+  background-color: #fff; /* Sidebar background */
+  z-index: 10; /* Ensure the sidebar stays above content */
+}
+
 .main {
-  width: 95%;
-}
-.card-action {
-  display: flex;
-  justify-content: space-between;
-}
-.dropdown-menu.show {
-  transform: translate(10px, -5px) !important;
+  flex: 1; /* Take the remaining width */
+  overflow: auto;
+  min-height: 100vh;
+  background-color: #ebf0f7;
 }
 
-.badge {
-  font-family: "Poppins", sans-serif;
-  border-radius: 100px;
-  padding: 2px 13px;
-  font-size: 12px;
-}
-.active-icon-menu {
-  color: #5868e8 !important;
-}
-.form-control-color {
-  height: max-content;
-}
-.align-margin {
-  margin: auto;
-}
-#demo-card {
-  max-width: calc(100% / 3);
-  margin: auto;
+.content {
+  padding: 2rem;
+  margin: 0 auto;
+  margin-left: 100px;
 }
 
+.direct-job-listings-container {
+  background: #ffffff; /* White background */
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: auto; /* Center the content */
+  margin-top: 10px;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  border: 1px solid #dee2e6;
+}
+
+@media (max-width: 768px) {
+  .sidebar-container {
+    flex: 0 0 200px;
+    max-width: 200px;
+    min-width: 200px;
+  }
+  .content {
+    padding: 1rem;
+  }
+}
+
+/* Custom Buttons */
 .custom-btn {
-  /* background-color: #006494; */
   background-color: #296e85;
   color: #fff;
   border: none;
@@ -212,4 +212,38 @@ input:focus-visible {
 .add-btn:hover {
   background-color: #1f5162;
   transition: all ease-in-out 0.3s;
+}
+
+/* Additional styles for table and content alignment */
+.table th, .table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.linkedin-id {
+  display: inline-block;
+  max-width: 100%; /* Adjust the width dynamically */
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Ensure overflowing text is hidden */
+  text-overflow: ellipsis; /* Add ellipsis for long text */
+  vertical-align: middle;
+}
+
+
+
+.fa-linkedin, .fa-envelope {
+  display: inline-block;
+  margin-right: 0.5rem; /* Consistent spacing */
+  vertical-align: middle; /* Ensures vertical alignment with text */
+}
+
+.col-12.d-flex.align-items-center {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Adjust spacing between icon and text */
+}
+
+.col-12.d-flex.align-items-center a {
+  text-decoration: none; /* Remove underline for the link */
+  color: inherit; /* Use the same text color */
 }

@@ -1,17 +1,54 @@
 .header {
-    background-color: #2D445A; 
-    padding: 20px;
-    text-align: center;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #296e85;
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-title {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.logout-container {
+  display: flex;
+  align-items: center;
+}
+
+.logout-btn {
+  background-color: #fa5f55;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.logout-btn:hover {
+  background-color: #e03e2d;
+  transform: scale(1.05);
+}
+
+.logout-btn:focus {
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
   }
-  
+
   .header-title {
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0;
+    font-size: 1.5rem;
   }
-  
+}

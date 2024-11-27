@@ -5,6 +5,8 @@ import ExperienceLevelModal from './CustomModal';
 import JobModeModal from './CustomModal';
 import ProfileModal from './CustomProfileModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { CONSTANTS } from '../data/Constants';
 import {
 	faEnvelope,
@@ -96,6 +98,32 @@ const ProfilePage = (props) => {
 										? profile[CONSTANTS.PROFILE.EMAIL]
 										: ''}
 								</span>
+							</div>
+							<div className="col-12 d-flex align-items-center">
+								<FontAwesomeIcon icon={faLinkedin} size="1x" />
+								<a
+									className="linkedin-id"
+									href={profile[CONSTANTS.PROFILE.LINKEDIN_ID]}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{profile[CONSTANTS.PROFILE.LINKEDIN_ID]
+									? profile[CONSTANTS.PROFILE.LINKEDIN_ID]
+									: ''}
+								</a>
+							</div>
+							<div className="col-12 d-flex align-items-center">
+								<FontAwesomeIcon icon={faGithub} size="1x" />
+								<a
+									className="linkedin-id"
+									href={profile[CONSTANTS.PROFILE.GITHUB_ID]}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{profile[CONSTANTS.PROFILE.GITHUB_ID]
+									? profile[CONSTANTS.PROFILE.GITHUB_ID]
+									: ''}
+								</a>
 							</div>
 							<div className='col-12 d-flex align-items-center'>
 								<FontAwesomeIcon icon={faPhone} size='1x' />
